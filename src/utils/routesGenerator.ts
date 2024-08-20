@@ -1,15 +1,9 @@
 import { ReactNode } from "react";
+import { TItem } from "../types/types.global";
 
 type TRoutes = {
     path: string;
     element: ReactNode;
-};
-
-type TItem = {
-    name: string;
-    path?: string;
-    element?: ReactNode;
-    children?: TItem[];
 };
 
 const routesGenerator = (items: TItem[]) => {

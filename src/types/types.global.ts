@@ -6,3 +6,5 @@ export type TItem = {
     element?: ReactNode;
     children?: TItem[];
 };
+
+export type TRole = "super-admin" | "admin" | "faculty" | "student";

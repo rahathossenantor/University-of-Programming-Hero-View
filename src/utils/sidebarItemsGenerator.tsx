@@ -1,14 +1,12 @@
 import { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
-import { TItem } from "../types/types.global";
+import { TItem, TRole } from "../types/types.global";
 
 type TSidebarItem = {
     key: string;
     label: ReactNode;
     children?: TSidebarItem[];
 };
-
-type TRole = "super-admin" | "admin" | "faculty" | "student";
 
 const sidebarItemsGenerator = (items: TItem[], role: TRole) => {
     const sidebarItems = items.reduce((acc: TSidebarItem[], item) => {

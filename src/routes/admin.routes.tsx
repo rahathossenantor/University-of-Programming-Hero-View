@@ -1,6 +1,6 @@
 import CreateFaculty from "../pages/admin/CreateFaculty";
 import CreateStudent from "../pages/admin/CreateStudent";
-import Dashboard from "../pages/admin/Dashboard";
+import AdminDashboard from "../pages/admin/AdminDashboard";
 import CreateAdmin from "../pages/admin/CreateAdmin";
 import routesGenerator from "../utils/routesGenerator";
 import sidebarItemsGenerator from "../utils/sidebarItemsGenerator";
@@ -9,7 +9,7 @@ const adminPaths = [
     {
         name: "Dashboard",
         path: "dashboard",
-        element: <Dashboard />
+        element: <AdminDashboard />
     },
     {
         name: "User Management",

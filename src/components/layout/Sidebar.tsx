@@ -1,8 +1,9 @@
 import { Layout, Menu } from "antd";
-import { TRole } from "../../types/types.global";
+import { TUser } from "../../types/types.global";
 import { adminSidebarItems } from "../../routes/admin.routes";
 import { facultySidebarItems } from "../../routes/faculty.routes";
 import { studentSidebarItems } from "../../routes/student.routes";
+import { useAppSelector } from "../../redux/hooks";
 
 const { Sider } = Layout;
 
@@ -15,8 +16,10 @@ const userRoles = {
 
 const Sidebar = () => {
     // implement sidebar items based on role
-    const role: TRole = "admin";
+    const { user } = useAppSelector((state) => state.auth);
+    const role = (user! as TUser).role;
     let sidebarItems;
+
     switch (role) {
         case userRoles.ADMIN:
             sidebarItems = adminSidebarItems;
@@ -27,7 +30,7 @@ const Sidebar = () => {
         case userRoles.STUDENT:
             sidebarItems = studentSidebarItems;
             break;
-    
+
         default:
             break;
     };

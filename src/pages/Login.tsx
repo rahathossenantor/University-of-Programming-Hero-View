@@ -20,8 +20,7 @@ const Login = () => {
         }
     });
 
-    const [login, { error }] = useLoginMutation();
-    console.log(error);
+    const [login] = useLoginMutation();
 
     const onSubmit = async (data: FieldValues) => {
         const toastId = toast.loading("Loading...");

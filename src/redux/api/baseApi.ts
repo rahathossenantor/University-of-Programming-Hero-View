@@ -1,6 +1,6 @@
 import { BaseQueryApi, BaseQueryFn, createApi, DefinitionType, FetchArgs, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { RootState } from "../store";
 import { loginUser, logoutUser } from "../features/auth/authSlice";
+import { RootState } from "../store";
 
 // const baseUrl = "http://localhost:5000/api/v1";
 const baseUrl = "https://university-of-programming-hero.vercel.app/api/v1";

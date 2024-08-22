@@ -1,19 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button } from "antd";
-import { FieldValues, useForm } from "react-hook-form";
+import { Button, Row } from "antd";
+import { FieldValues, FormProvider, useForm } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/auth.api";
 import { useAppDispatch } from "../redux/hooks";
 import { loginUser } from "../redux/features/auth/authSlice";
 import verifyToken from "../utils/verifyToken";
-import { useNavigate } from "react-router-dom";
 import { TUser } from "../types/types.global";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import CustomField from "../components/ui/CustomField";
 
 const Login = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const { register, handleSubmit } = useForm({
+    const methods = useForm({
         defaultValues: {
             id: "A-0001",
             password: "admin"
@@ -24,6 +25,7 @@ const Login = () => {
 
     const onSubmit = async (data: FieldValues) => {
         const toastId = toast.loading("Loading...");
+        console.log(data);
         try {
             const res = await login(data).unwrap();
             const user = verifyToken(res.data.accessToken) as TUser;
@@ -35,23 +37,28 @@ const Login = () => {
             navigate(`/${user.role}/dashboard`);
         } catch (err: any) {
             toast.error(err.message, { id: toastId, duration: 2000 });
-        }
+        };
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div>
-                <div>
-                    <label htmlFor="id">User ID:</label>
-                    <input type="text" id="id" placeholder="Enter your ID" {...register("id")} />
-                </div>
-                <div>
-                    <label htmlFor="password">User Password:</label>
-                    <input type="text" id="password" placeholder="Enter your password" {...register("password")} />
-                </div>
-                <Button htmlType="submit">Login</Button>
-            </div>
-        </form>
+        <FormProvider {...methods}>
+            <Row justify="center" align="middle">
+                <form
+                    style={{
+                        width: "400px",
+                        padding: "20px",
+                        borderRadius: "10px",
+                        boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+                        marginTop: "20px"
+                    }}
+                    onSubmit={methods.handleSubmit(onSubmit)}
+                >
+                    <CustomField type="text" name="id" label="User ID" />
+                    <CustomField type="text" name="password" label="User Password" />
+                    <Button htmlType="submit" style={{ fontSize: "15px" }}>Login</Button>
+                </form>
+            </Row>
+        </FormProvider>
     );
 };
 

@@ -7,6 +7,37 @@ import sidebarItemsGenerator from "../utils/sidebarItemsGenerator";
 import AcademicSemesters from "../pages/admin/academicManagement/AcademicSemesters";
 import CreateAcademicSemester from "../pages/admin/academicManagement/CreateAcademicSemester";
 
+const userManagementPaths = [
+    {
+        name: "Create Admin",
+        path: "create-admin",
+        element: <CreateAdmin />
+    },
+    {
+        name: "Create Faculty",
+        path: "create-faculty",
+        element: <CreateFaculty />
+    },
+    {
+        name: "Create Student",
+        path: "create-student",
+        element: <CreateStudent />
+    },
+];
+
+const academicManagementPaths = [
+    {
+        name: "A. Semesters",
+        path: "academic-semesters",
+        element: <AcademicSemesters />
+    },
+    {
+        name: "Create A. Semester",
+        path: "create-academic-semesters",
+        element: <CreateAcademicSemester />
+    },
+];
+
 const adminPaths = [
     {
         name: "Dashboard",
@@ -15,38 +46,11 @@ const adminPaths = [
     },
     {
         name: "User Management",
-        children: [
-            {
-                name: "Create Admin",
-                path: "create-admin",
-                element: <CreateAdmin />
-            },
-            {
-                name: "Create Faculty",
-                path: "create-faculty",
-                element: <CreateFaculty />
-            },
-            {
-                name: "Create Student",
-                path: "create-student",
-                element: <CreateStudent />
-            },
-        ]
+        children: userManagementPaths,
     },
     {
         name: "Academic Management",
-        children: [
-            {
-                name: "A. Semesters",
-                path: "academic-semesters",
-                element: <AcademicSemesters />
-            },
-            {
-                name: "Create A. Semester",
-                path: "create-academic-semesters",
-                element: <CreateAcademicSemester />
-            },
-        ]
+        children: academicManagementPaths,
     }
 ];
 export const adminRoutes = routesGenerator(adminPaths);

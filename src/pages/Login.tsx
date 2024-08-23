@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Row } from "antd";
-import { FieldValues, FormProvider, useForm } from "react-hook-form";
+import { FieldValues } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/auth.api";
 import { useAppDispatch } from "../redux/hooks";
 import { loginUser } from "../redux/features/auth/authSlice";
@@ -9,20 +8,14 @@ import { TUser } from "../types/types.global";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import CustomField from "../components/ui/CustomField";
+import CustomForm from "../components/ui/CustomForm";
 
 const Login = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-
-    const methods = useForm({
-        defaultValues: {
-            id: "A-0001",
-            password: "admin"
-        }
-    });
-
     const [login] = useLoginMutation();
 
+    // submit handler
     const onSubmit = async (data: FieldValues) => {
         const toastId = toast.loading("Loading...");
         console.log(data);
@@ -40,10 +33,15 @@ const Login = () => {
         };
     };
 
+    const defaultValues = {
+        id: "A-0001",
+        password: "admin"
+    };
+
     return (
-        <FormProvider {...methods}>
+        <CustomForm onSubmit={onSubmit} defaultValues={defaultValues}>
             <Row justify="center" align="middle">
-                <form
+                <div
                     style={{
                         width: "400px",
                         padding: "20px",
@@ -51,14 +49,13 @@ const Login = () => {
                         boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
                         marginTop: "20px"
                     }}
-                    onSubmit={methods.handleSubmit(onSubmit)}
                 >
-                    <CustomField type="text" name="id" label="User ID" />
-                    <CustomField type="text" name="password" label="User Password" />
+                    <CustomField type="text" name="id" label="User ID:" />
+                    <CustomField type="text" name="password" label="User Password:" />
                     <Button htmlType="submit" style={{ fontSize: "15px" }}>Login</Button>
-                </form>
+                </div>
             </Row>
-        </FormProvider>
+        </CustomForm>
     );
 };
 

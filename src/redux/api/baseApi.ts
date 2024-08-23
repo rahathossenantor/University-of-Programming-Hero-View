@@ -1,6 +1,7 @@
 import { BaseQueryApi, BaseQueryFn, createApi, DefinitionType, FetchArgs, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { loginUser, logoutUser } from "../features/auth/authSlice";
 import { RootState } from "../store";
+import { toast } from "sonner";
 
 // const baseUrl = "http://localhost:5000/api/v1";
 const baseUrl = "https://university-of-programming-hero.vercel.app/api/v1";
@@ -23,6 +24,10 @@ const customBaseQuery: BaseQueryFn<
     DefinitionType
 > = async (args, api, extraOptions): Promise<any> => {
     let query = await baseQuery(args, api, extraOptions);
+
+    if (query?.error?.status === 403) {
+        toast.error("User does not exist!", { duration: 2000 });
+    }
 
     if (query?.error?.status === 401) {
         // get refresh token

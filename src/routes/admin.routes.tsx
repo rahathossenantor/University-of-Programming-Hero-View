@@ -5,6 +5,7 @@ import AdminDashboard from "../pages/admin/AdminDashboard";
 import routesGenerator from "../utils/routesGenerator";
 import sidebarItemsGenerator from "../utils/sidebarItemsGenerator";
 import AcademicSemesters from "../pages/admin/academicManagement/AcademicSemesters";
+import CreateAcademicSemester from "../pages/admin/academicManagement/CreateAcademicSemester";
 
 const adminPaths = [
     {
@@ -36,9 +37,14 @@ const adminPaths = [
         name: "Academic Management",
         children: [
             {
-                name: "Academic Semesters",
+                name: "A. Semesters",
                 path: "academic-semesters",
                 element: <AcademicSemesters />
+            },
+            {
+                name: "Create A. Semester",
+                path: "create-academic-semesters",
+                element: <CreateAcademicSemester />
             },
         ]
     }

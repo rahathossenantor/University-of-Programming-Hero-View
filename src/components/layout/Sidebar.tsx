@@ -39,6 +39,14 @@ const Sidebar = () => {
         <Sider
             breakpoint="lg"
             collapsedWidth="0"
+            style={{
+                height: "100vh",
+                position: "sticky",
+                top: 0,
+                overflow: "auto",
+                overflowX: "hidden",
+                overflowY: "auto"
+            }}
         >
             <div
                 className="demo-logo-vertical"

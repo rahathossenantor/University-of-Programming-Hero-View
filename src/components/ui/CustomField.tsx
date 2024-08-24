@@ -17,6 +17,7 @@ const CustomField = ({ type, name, label }: TCustomFieldProps) => {
                         {...field}
                         type={type}
                         id={name}
+                        size="large"
                         style={{ fontSize: "15px" }}
                     />
                 </Form.Item>

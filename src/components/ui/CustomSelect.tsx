@@ -1,19 +1,31 @@
 import { Form, Select } from "antd";
+import { Controller } from "react-hook-form";
 
-const CustomSelect = ({ label }: { label: string }) => {
+type TCustomSelectProps = {
+    name: string,
+    label: string,
+    options: {
+        value: string;
+        label: string;
+        disabled?: boolean;
+    }[];
+};
+
+const CustomSelect = ({ name, label, options }: TCustomSelectProps) => {
     return (
-        <Form.Item label={label}>
-            <Select
-                defaultValue="lucy"
-                style={{ width: "100%" }}
-                options={[
-                    { value: "jack", label: "Jack" },
-                    { value: "lucy", label: "Lucy" },
-                    { value: "Yiminghe", label: "yiminghe" },
-                    { value: "disabled", label: "Disabled", disabled: true },
-                ]}
-            />
-        </Form.Item>
+        <Controller
+            name={name}
+            render={({ field }) =>
+                <Form.Item label={label}>
+                    <Select
+                        {...field}
+                        size="large"
+                        style={{ width: "100%" }}
+                        options={options}
+                    />
+                </Form.Item>
+            }
+        />
     );
 };
 

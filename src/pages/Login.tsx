@@ -18,7 +18,6 @@ const Login = () => {
     // submit handler
     const onSubmit = async (data: FieldValues) => {
         const toastId = toast.loading("Loading...");
-        console.log(data);
         try {
             const res = await login(data).unwrap();
             const user = verifyToken(res.data.accessToken) as TUser;
@@ -26,10 +25,10 @@ const Login = () => {
                 user,
                 token: res.data.accessToken
             }));
-            toast.success("Login successful!", { id: toastId, duration: 2000 });
+            toast.success(res.message, { id: toastId, duration: 2000 });
             navigate(`/${user.role}/dashboard`);
         } catch (err: any) {
-            toast.error(err.message, { id: toastId, duration: 2000 });
+            toast.error(err?.data?.message, { id: toastId, duration: 2000 });
         };
     };
 
@@ -50,6 +49,7 @@ const Login = () => {
                         marginTop: "20px"
                     }}
                 >
+                    <CustomForm.Title>Login</CustomForm.Title>
                     <CustomField type="text" name="id" label="User ID:" />
                     <CustomField type="text" name="password" label="User Password:" />
                     <Button htmlType="submit" style={{ fontSize: "15px" }}>Login</Button>

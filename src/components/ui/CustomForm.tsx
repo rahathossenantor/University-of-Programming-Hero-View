@@ -14,7 +14,7 @@ type TFormProps = {
 
 const CustomForm = ({ children, onSubmit, defaultValues, resolver }: TFormProps) => {
     const formConfig: TFormConfig = {};
-    
+
     if (defaultValues) {
         formConfig["defaultValues"] = defaultValues;
     }
@@ -32,5 +32,12 @@ const CustomForm = ({ children, onSubmit, defaultValues, resolver }: TFormProps)
         </FormProvider>
     );
 };
+
+const Title = ({ children }: { children: ReactNode }) => {
+    return (
+        <h2 style={{ textAlign: "center", margin: "8px 0" }}>{children}</h2>
+    );
+};
+CustomForm.Title = Title;
 
 export default CustomForm;

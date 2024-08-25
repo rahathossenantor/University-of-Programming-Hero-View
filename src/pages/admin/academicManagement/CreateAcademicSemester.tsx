@@ -3,6 +3,8 @@ import CustomForm from "../../../components/ui/CustomForm";
 import CustomSelect from "../../../components/ui/CustomSelect";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { monthOptions, semesterOptions, yearOptions } from "../../../constants/academicManagement.constants";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { academicSemesterSchema } from "../../../schemas/academicManagement.schema";
 
 const CreateAcademicSemester = () => {
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
@@ -21,7 +23,7 @@ const CreateAcademicSemester = () => {
             <h2>Create Academic Semester</h2>
             <Flex justify="center" align="center">
                 <Col span={6}>
-                    <CustomForm onSubmit={onSubmit}>
+                    <CustomForm onSubmit={onSubmit} resolver={zodResolver(academicSemesterSchema)}>
                         <div
                             style={{
                                 width: "500px",

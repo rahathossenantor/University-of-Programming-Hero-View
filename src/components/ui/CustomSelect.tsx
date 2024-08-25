@@ -15,7 +15,7 @@ const CustomSelect = ({ name, label, options }: TCustomSelectProps) => {
     return (
         <Controller
             name={name}
-            render={({ field }) =>
+            render={({ field, fieldState: { error } }) =>
                 <Form.Item label={label}>
                     <Select
                         {...field}
@@ -23,6 +23,7 @@ const CustomSelect = ({ name, label, options }: TCustomSelectProps) => {
                         style={{ width: "100%" }}
                         options={options}
                     />
+                    {error && <small style={{ color: "red" }}>{error.message}</small>}
                 </Form.Item>
             }
         />

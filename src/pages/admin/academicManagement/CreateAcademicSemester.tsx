@@ -12,6 +12,7 @@ const CreateAcademicSemester = () => {
     const [createAcademicSemester] = useCreateAcademicSemesterMutation();
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+        const toastId = toast.loading("Createing academic semester...");
         const academicSemester = {
             name: semesterOptions[Number(data?.name) - 1]?.label,
             code: data.name,
@@ -22,14 +23,14 @@ const CreateAcademicSemester = () => {
 
         try {
             const res = await createAcademicSemester(academicSemester).unwrap();
-            toast.success(res?.message);
+            toast.success(res?.message, { id: toastId });
         } catch (err: any) {
-            toast.error(err?.data?.message);
+            toast.error(err?.data?.message, { id: toastId });
         }
     };
 
     return (
-        <Flex justify="center" align="center">
+        <Flex justify="center" align="center" style={{ backgroundColor: "gray", height: "100vh" }}>
             <Col span={6}>
                 <CustomForm
                     onSubmit={onSubmit}

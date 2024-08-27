@@ -9,9 +9,10 @@ type TCustomSelectProps = {
         label: string;
         disabled?: boolean;
     }[];
+    disabled?: boolean;
 };
 
-const CustomSelect = ({ name, label, options }: TCustomSelectProps) => {
+const CustomSelect = ({ name, label, options, disabled }: TCustomSelectProps) => {
     return (
         <Controller
             name={name}
@@ -19,6 +20,7 @@ const CustomSelect = ({ name, label, options }: TCustomSelectProps) => {
                 <Form.Item label={label}>
                     <Select
                         {...field}
+                        disabled={disabled}
                         size="large"
                         style={{ width: "100%" }}
                         options={options}

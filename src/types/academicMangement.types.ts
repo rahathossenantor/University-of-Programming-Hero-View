@@ -6,3 +6,7 @@ export type TAcademicSemesterRes = {
     startMonth: string;
     endMonth: string;
 };
+
+export type TAcademicFacultyRes = {
+    name: string;
+};

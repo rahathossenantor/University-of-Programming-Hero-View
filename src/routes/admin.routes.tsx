@@ -7,6 +7,7 @@ import sidebarItemsGenerator from "../utils/sidebarItemsGenerator";
 import AcademicSemesters from "../pages/admin/academicManagement/AcademicSemesters";
 import CreateAcademicSemester from "../pages/admin/academicManagement/CreateAcademicSemester";
 import CreateAcademicFaculty from "../pages/admin/academicManagement/CreateAcademicFaculty";
+import AcademicFaculties from "../pages/admin/academicManagement/AcademicFaculties";
 
 const userManagementPaths = [
     {
@@ -28,19 +29,24 @@ const userManagementPaths = [
 
 const academicManagementPaths = [
     {
-        name: "A. Semesters",
-        path: "academic-semesters",
-        element: <AcademicSemesters />
-    },
-    {
         name: "Create A. Semester",
         path: "create-academic-semesters",
         element: <CreateAcademicSemester />
     },
     {
+        name: "A. Semesters",
+        path: "academic-semesters",
+        element: <AcademicSemesters />
+    },
+    {
         name: "Create A. Faculty",
         path: "create-academic-faculty",
         element: <CreateAcademicFaculty />
+    },
+    {
+        name: "A. Faculties",
+        path: "academic-faculties",
+        element: <AcademicFaculties />
     },
 ];
 

@@ -6,6 +6,7 @@ import routesGenerator from "../utils/routesGenerator";
 import sidebarItemsGenerator from "../utils/sidebarItemsGenerator";
 import AcademicSemesters from "../pages/admin/academicManagement/AcademicSemesters";
 import CreateAcademicSemester from "../pages/admin/academicManagement/CreateAcademicSemester";
+import CreateAcademicFaculty from "../pages/admin/academicManagement/CreateAcademicFaculty";
 
 const userManagementPaths = [
     {
@@ -35,6 +36,11 @@ const academicManagementPaths = [
         name: "Create A. Semester",
         path: "create-academic-semesters",
         element: <CreateAcademicSemester />
+    },
+    {
+        name: "Create A. Faculty",
+        path: "create-academic-faculty",
+        element: <CreateAcademicFaculty />
     },
 ];
 

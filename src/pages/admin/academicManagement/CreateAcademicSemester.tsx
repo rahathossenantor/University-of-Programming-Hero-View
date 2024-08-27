@@ -30,7 +30,7 @@ const CreateAcademicSemester = () => {
     };
 
     return (
-        <Flex justify="center" align="center" style={{ backgroundColor: "gray", height: "100vh" }}>
+        <Flex justify="center" align="center">
             <Col span={6}>
                 <CustomForm
                     onSubmit={onSubmit}

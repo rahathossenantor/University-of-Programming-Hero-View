@@ -38,3 +38,8 @@ export const yearOptions = [0, 1, 2, 3, 4].map((num) => ({
     value: String(currentYear + num),
     label: String(currentYear + num)
 }));
+
+export const semesterYearFilterOptions = [0, 1, 2, 3, 4].map((num) => ({
+    text: String(currentYear + num),
+    value: String(currentYear + num)
+}));

@@ -1,5 +1,5 @@
 import { BaseQueryApi } from "@reduxjs/toolkit/query";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 
 export type TErrorRes = {
     data: {
@@ -41,6 +41,11 @@ export type TUser = {
     role: string;
     iat: number;
     exp: number;
+};
+
+export type TQueryParam = {
+    name: string;
+    value: boolean | React.Key;
 };
 
 export type TRole = "super-admin" | "admin" | "faculty" | "student";

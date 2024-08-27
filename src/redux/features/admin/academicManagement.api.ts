@@ -1,14 +1,24 @@
 import { TAcademicSemesterRes } from "../../../types/academicMangement.types";
-import { TDataResWithRedux } from "../../../types/types.global";
+import { TDataResWithRedux, TQueryParam } from "../../../types/types.global";
 import baseApi from "../../api/baseApi";
 
 const academicManagementApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getAllAcademicSemesters: builder.query({
-            query: () => ({
-                url: "/academic-semesters",
-                method: "GET"
-            }),
+            query: (queryParams: TQueryParam[]) => {
+                const params = new URLSearchParams();
+                if (queryParams) {
+                    queryParams.forEach((query: TQueryParam) => {
+                        params.append(query.name, query.value as string);
+                    });
+                }
+
+                return {
+                    url: "/academic-semesters",
+                    method: "GET",
+                    params
+                };
+            },
             transformResponse: (response: TDataResWithRedux<TAcademicSemesterRes[]>) => {
                 return {
                     data: response?.data,

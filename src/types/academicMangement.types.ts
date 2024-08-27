@@ -8,5 +8,12 @@ export type TAcademicSemesterRes = {
 };
 
 export type TAcademicFacultyRes = {
+    _id: string;
     name: string;
+};
+
+export type TAcademicDepartmentRes = {
+    _id: string;
+    name: string;
+    academicFaculty: string;
 };

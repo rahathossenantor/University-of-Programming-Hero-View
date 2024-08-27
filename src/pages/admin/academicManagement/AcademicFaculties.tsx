@@ -1,12 +1,7 @@
-import { Table, TableColumnsType } from "antd";
+import { Table } from "antd";
 import { useGetAllAcademicFacultiesQuery } from "../../../redux/features/admin/academicManagement.api";
-import { TAcademicFacultyRes } from "../../../types/academicMangement.types";
 
-type TTableDataType = Partial<TAcademicFacultyRes> & {
-    key: React.Key;
-};
-
-const columns: TableColumnsType<TTableDataType> = [
+const columns = [
     {
         title: "Faculty",
         dataIndex: "name"

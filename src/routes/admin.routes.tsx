@@ -9,6 +9,7 @@ import CreateAcademicSemester from "../pages/admin/academicManagement/CreateAcad
 import CreateAcademicFaculty from "../pages/admin/academicManagement/CreateAcademicFaculty";
 import AcademicFaculties from "../pages/admin/academicManagement/AcademicFaculties";
 import CreateAcademicDepartment from "../pages/admin/academicManagement/CreateAcademicDepartment";
+import AcademicDepartments from "../pages/admin/academicManagement/AcademicDepartments";
 
 const userManagementPaths = [
     {
@@ -53,6 +54,11 @@ const academicManagementPaths = [
         name: "Create A. Department",
         path: "create-academic-department",
         element: <CreateAcademicDepartment />
+    },
+    {
+        name: "A. Departments",
+        path: "academic-departments",
+        element: <AcademicDepartments />
     },
 ];
 

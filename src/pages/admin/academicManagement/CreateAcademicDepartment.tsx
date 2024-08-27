@@ -4,12 +4,13 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CustomSelect from "../../../components/ui/CustomSelect";
 import { academicDepartmentSchema } from "../../../schemas/academicManagement.schema";
-import { useGetAllAcademicFacultiesQuery } from "../../../redux/features/admin/academicManagement.api";
+import { useCreateAcademicDepartmentMutation, useGetAllAcademicFacultiesQuery } from "../../../redux/features/admin/academicManagement.api";
 import { departmentOptions } from "../../../constants/academicManagement.constants";
 import { toast } from "sonner";
 
 const CreateAcademicDepartment = () => {
     const { data, isLoading } = useGetAllAcademicFacultiesQuery(undefined);
+    const [createAcademicDepartment] = useCreateAcademicDepartmentMutation();
     
     const facultiesForDepartmentOptions = data?.data?.data?.map(faculty => ({
         label: faculty.name,
@@ -20,7 +21,8 @@ const CreateAcademicDepartment = () => {
         const toastId = toast.loading("Createing academic department...");
         
         try {
-            console.log(data);
+            const res = await createAcademicDepartment(data).unwrap();
+            toast.success(res?.message, { id: toastId });
         } catch (err: any) {
             toast.error(err?.data?.message, { id: toastId });
         }

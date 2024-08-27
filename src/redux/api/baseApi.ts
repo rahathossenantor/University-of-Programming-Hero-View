@@ -18,11 +18,7 @@ const baseQuery = fetchBaseQuery({
     }
 });
 
-const customBaseQuery: BaseQueryFn<
-    FetchArgs,
-    BaseQueryApi,
-    DefinitionType
-> = async (args, api, extraOptions): Promise<any> => {
+const customBaseQuery: BaseQueryFn<FetchArgs, BaseQueryApi, DefinitionType> = async (args, api, extraOptions): Promise<any> => {
     let query = await baseQuery(args, api, extraOptions);
 
     if (query?.error?.status === 403) {

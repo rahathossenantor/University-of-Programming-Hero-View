@@ -1,3 +1,4 @@
+// academic semester options
 const months = [
     "January",
     "February",
@@ -43,3 +44,19 @@ export const semesterYearFilterOptions = [0, 1, 2, 3, 4].map((num) => ({
     text: String(currentYear + num),
     value: String(currentYear + num)
 }));
+
+// academic faculty options
+export const facultyOptions = [
+    {
+        value: "Faculty of Web Development",
+        label: "Faculty of Web Development"
+    },
+    {
+        value: "Faculty of Computer Science Engineering",
+        label: "Faculty of Computer Science Engineering"
+    },
+    {
+        value: "Faculty of Programming",
+        label: "Faculty of Programming"
+    },
+];

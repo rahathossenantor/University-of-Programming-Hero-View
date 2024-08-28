@@ -1,4 +1,3 @@
-
 const CreateStudent = () => {
     return (
         <div>

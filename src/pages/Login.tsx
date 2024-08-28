@@ -32,13 +32,13 @@ const Login = () => {
         };
     };
 
-    const defaultValues = {
+    const defaultLoginFormValues = {
         id: "A-0001",
         password: "admin"
     };
 
     return (
-        <CustomForm onSubmit={onSubmit} defaultValues={defaultValues}>
+        <CustomForm onSubmit={onSubmit} defaultValues={defaultLoginFormValues}>
             <Row justify="center" align="middle">
                 <div
                     style={{
@@ -50,8 +50,8 @@ const Login = () => {
                     }}
                 >
                     <CustomForm.Title>Login</CustomForm.Title>
-                    <CustomField type="text" name="id" label="User ID" />
-                    <CustomField type="text" name="password" label="User Password" />
+                    <CustomField type="text" name="id" label="User ID" isRequired />
+                    <CustomField type="text" name="password" label="User Password" isRequired />
                     <Button htmlType="submit" style={{ fontSize: "15px" }}>Login</Button>
                 </div>
             </Row>

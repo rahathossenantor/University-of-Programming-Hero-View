@@ -6,8 +6,54 @@ import CustomSelect from "../../../components/ui/CustomSelect";
 import { bloodGroupOptions, genderOptions } from "../../../constants/userManagement.constants";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { studentSchema } from "../../../schemas/userManagement.schema";
+import { useGetAllAcademicDepartmentsQuery, useGetAllAcademicSemestersQuery } from "../../../redux/features/admin/academicManagement.api";
+
+const defaultStudentFormValues = {
+    name: {
+        firstName: "Sidratul",
+        middleName: "",
+        lastName: "Muntaha"
+    },
+    gender: "Female",
+    dateOfBirth: "2012-09-05",
+    bloodGroup: "O-",
+    email: "sidratul.muntaha@gmail.com",
+    contactNo: "+8801986523489",
+    emergencyContactNo: "+8801986523489",
+    presentAddress: "Shiddhirganj, Narayanganj, Bangladesh.",
+    permanentAddress: "Mirsharai, Chattogram, Bangladesh.",
+    academicDepartment: "Department of Web Development",
+    academicSemester: "Autumn 2024",
+    parents: {
+        fatherName: "Gias Uddin Ahmed Talukdar",
+        fatherOccupation: "Businessman",
+        fatherContactNo: "+8801719180689",
+        motherName: "Nazmun Nahar",
+        motherOccupation: "Housewife",
+        motherContactNo: "+8801849995953"
+    },
+    guardian: {
+        name: "Gias Uddin Ahmed Talukdar",
+        occupation: "Businessman",
+        contactNo: "+8801719180689",
+        address: "Shiddhirganj, Narayanganj, Bangladesh."
+    },
+};
 
 const CreateStudent = () => {
+    const { data: academicDepartments, isLoading: isAcademicDepartmentLoading } = useGetAllAcademicDepartmentsQuery(undefined);
+    const { data: academicSemesters, isLoading: isAcademicSemesterLoading } = useGetAllAcademicSemestersQuery(undefined);
+
+    const academicDepartmentOptions = academicDepartments?.data?.data?.map(academicDepartment => ({
+        label: academicDepartment.name,
+        value: academicDepartment._id,
+    }));
+
+    const academicSemesterOptions = academicSemesters?.data?.data?.map(academicSemester => ({
+        label: `${academicSemester.name} ${academicSemester.year}`,
+        value: academicSemester._id,
+    }));
+
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         console.log(data);
 
@@ -22,25 +68,26 @@ const CreateStudent = () => {
                 <CustomForm
                     onSubmit={onSubmit}
                     resolver={zodResolver(studentSchema)}
+                    defaultValues={defaultStudentFormValues}
                 >
                     <CustomForm.Title>Create Studnt</CustomForm.Title>
 
                     <Divider>Personal Info</Divider>
                     <Row gutter={10}>
-                        <Col span={24} md={{span: 12}} lg={{span: 8}}>
+                        <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
                             <CustomField type="text" label="First Name" name="name.firstName" isRequired />
                         </Col>
-                        <Col span={24} md={{span: 12}} lg={{span: 8}}>
+                        <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
                             <CustomField type="text" label="Middle Name" name="name.middleName" />
                         </Col>
-                        <Col span={24} md={{span: 12}} lg={{span: 8}}>
+                        <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
                             <CustomField type="text" label="Last Name" name="name.lastName" isRequired />
                         </Col>
-                        <Col span={24} md={{span: 12}} lg={{span: 8}}>
+                        <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
                             <CustomSelect label="Gender" name="gender" options={genderOptions} isRequired />
                         </Col>
-                        <Col span={24} md={{span: 12}} lg={{span: 8}}>
-                            <CustomSelect label="Blood Group" name="bloodGroup" options={bloodGroupOptions} isRequired />
+                        <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+                            <CustomSelect label="Blood Group" name="bloodGroup" options={bloodGroupOptions} />
                         </Col>
                     </Row>
 
@@ -104,10 +151,10 @@ const CreateStudent = () => {
                     <Divider>Academic Info</Divider>
                     <Row gutter={10}>
                         <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                            <CustomSelect label="Academic Semester" name="academicSemester" options={[]} isRequired />
+                            <CustomSelect label="Academic Department" name="academicDepartment" options={academicDepartmentOptions!} disabled={isAcademicDepartmentLoading} isRequired />
                         </Col>
                         <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                            <CustomSelect label="Academic Department" name="academicDepartment" options={[]} isRequired />
+                            <CustomSelect label="Academic Semester" name="academicSemester" options={academicSemesterOptions!} disabled={isAcademicSemesterLoading} isRequired />
                         </Col>
                     </Row>
 

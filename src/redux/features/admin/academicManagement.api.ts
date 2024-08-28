@@ -13,7 +13,7 @@ const academicManagementApi = baseApi.injectEndpoints({
             })
         }),
         getAllAcademicSemesters: builder.query({
-            query: (queryParams: TQueryParam[]) => {
+            query: (queryParams?: TQueryParam[]) => {
                 const params = new URLSearchParams();
                 if (queryParams) {
                     queryParams.forEach((query: TQueryParam) => {

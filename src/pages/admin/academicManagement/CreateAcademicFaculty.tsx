@@ -38,7 +38,7 @@ const CreateAcademicFaculty = () => {
                         }}
                     >
                         <CustomForm.Title>Create Academic Faculty</CustomForm.Title>
-                        <CustomSelect name="name" label="Faculty" options={facultyOptions} />
+                        <CustomSelect name="name" label="Faculty" options={facultyOptions} isRequired />
                         <Button htmlType="submit" style={{ fontSize: "15px" }}>Submit</Button>
                     </div>
                 </CustomForm>

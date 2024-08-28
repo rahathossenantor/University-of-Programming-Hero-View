@@ -50,8 +50,8 @@ const Login = () => {
                     }}
                 >
                     <CustomForm.Title>Login</CustomForm.Title>
-                    <CustomField type="text" name="id" label="User ID:" />
-                    <CustomField type="text" name="password" label="User Password:" />
+                    <CustomField type="text" name="id" label="User ID" />
+                    <CustomField type="text" name="password" label="User Password" />
                     <Button htmlType="submit" style={{ fontSize: "15px" }}>Login</Button>
                 </div>
             </Row>

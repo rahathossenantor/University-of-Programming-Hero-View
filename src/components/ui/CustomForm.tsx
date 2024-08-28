@@ -26,7 +26,13 @@ const CustomForm = ({ children, onSubmit, defaultValues, resolver }: TFormProps)
 
     return (
         <FormProvider {...methods} >
-            <Form layout="vertical" onFinish={methods.handleSubmit(onSubmit)}>
+            <Form
+                layout="vertical"
+                onFinish={methods.handleSubmit((data) => {
+                    onSubmit(data);
+                    methods.reset();
+                })}
+            >
                 {children}
             </Form>
         </FormProvider>

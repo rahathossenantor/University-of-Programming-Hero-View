@@ -5,17 +5,19 @@ type TCustomFieldProps = {
     type: string;
     name: string;
     label: string;
+    isRequired?: boolean;
 };
 
-const CustomField = ({ type, name, label }: TCustomFieldProps) => {
+const CustomField = ({ type, name, label, isRequired = false }: TCustomFieldProps) => {
     return (
         <Controller
             name={name}
             render={({ field }) =>
-                <Form.Item label={label}>
+                <Form.Item label={`${label}: ${isRequired ? "*" : ""}`}>
                     <Input
                         {...field}
                         type={type}
+                        required={isRequired}
                         id={name}
                         size="large"
                         style={{ fontSize: "15px" }}

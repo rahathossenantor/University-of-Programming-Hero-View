@@ -10,14 +10,15 @@ type TCustomSelectProps = {
         disabled?: boolean;
     }[];
     disabled?: boolean;
+    isRequired?: boolean;
 };
 
-const CustomSelect = ({ name, label, options, disabled }: TCustomSelectProps) => {
+const CustomSelect = ({ name, label, options, disabled, isRequired = false }: TCustomSelectProps) => {
     return (
         <Controller
             name={name}
             render={({ field, fieldState: { error } }) =>
-                <Form.Item label={label}>
+                <Form.Item label={`${label}: ${isRequired ? "*" : ""}`}>
                     <Select
                         {...field}
                         disabled={disabled}

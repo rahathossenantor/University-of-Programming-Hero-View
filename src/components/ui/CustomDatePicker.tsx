@@ -1,26 +1,22 @@
-import { Form, Input } from "antd";
+import { DatePicker, Form } from "antd";
 import { Controller } from "react-hook-form";
 
-type TCustomFieldProps = {
-    type: string;
+type TCustomDatePickerProps = {
     name: string;
     label: string;
     isRequired?: boolean;
 };
 
-const CustomField = ({ type, name, label, isRequired = false }: TCustomFieldProps) => {
+const CustomDatePicker = ({ name, label, isRequired = false }: TCustomDatePickerProps) => {
     return (
         <Controller
             name={name}
             render={({ field }) =>
                 <Form.Item label={`${label}: ${isRequired ? "*" : ""}`}>
-                    <Input
+                    <DatePicker
                         {...field}
-                        type={type}
-                        required={isRequired}
-                        id={name}
                         size="large"
-                        style={{ fontFamily: "Poppins" }}
+                        style={{ width: "100%" }}
                     />
                 </Form.Item>
             }
@@ -28,4 +24,4 @@ const CustomField = ({ type, name, label, isRequired = false }: TCustomFieldProp
     );
 };
 
-export default CustomField;
+export default CustomDatePicker;

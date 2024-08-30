@@ -3,8 +3,8 @@ import { loginUser, logoutUser } from "../features/auth/authSlice";
 import { RootState } from "../store";
 import { toast } from "sonner";
 
-// const baseUrl = "http://localhost:5000/api/v1";
-const baseUrl = "https://university-of-programming-hero.vercel.app/api/v1";
+export const baseUrl = "http://localhost:5000/api/v1";
+// export const baseUrl = "https://university-of-programming-hero.vercel.app/api/v1";
 
 const baseQuery = fetchBaseQuery({
     baseUrl,

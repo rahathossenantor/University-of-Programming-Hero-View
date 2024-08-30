@@ -1,12 +1,12 @@
-import { Button, Col, Divider, Row } from "antd";
+import { Button, Col, Divider, Form, Input, Row } from "antd";
 import CustomForm from "../../../components/ui/CustomForm";
 import CustomField from "../../../components/ui/CustomField";
-import { FieldValues, SubmitHandler } from "react-hook-form";
+import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
 import CustomSelect from "../../../components/ui/CustomSelect";
 import { bloodGroupOptions, genderOptions } from "../../../constants/userManagement.constants";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { studentSchema } from "../../../schemas/userManagement.schema";
 import { useGetAllAcademicDepartmentsQuery, useGetAllAcademicSemestersQuery } from "../../../redux/features/admin/academicManagement.api";
+import CustomDatePicker from "../../../components/ui/CustomDatePicker";
+import { useCreateStudentMutation } from "../../../redux/features/admin/userManagement.api";
 
 const defaultStudentFormValues = {
     name: {
@@ -15,15 +15,12 @@ const defaultStudentFormValues = {
         lastName: "Muntaha"
     },
     gender: "Female",
-    dateOfBirth: "2012-09-05",
     bloodGroup: "O-",
     email: "sidratul.muntaha@gmail.com",
     contactNo: "+8801986523489",
     emergencyContactNo: "+8801986523489",
     presentAddress: "Shiddhirganj, Narayanganj, Bangladesh.",
     permanentAddress: "Mirsharai, Chattogram, Bangladesh.",
-    academicDepartment: "Department of Web Development",
-    academicSemester: "Autumn 2024",
     parents: {
         fatherName: "Gias Uddin Ahmed Talukdar",
         fatherOccupation: "Businessman",
@@ -43,6 +40,7 @@ const defaultStudentFormValues = {
 const CreateStudent = () => {
     const { data: academicDepartments, isLoading: isAcademicDepartmentLoading } = useGetAllAcademicDepartmentsQuery(undefined);
     const { data: academicSemesters, isLoading: isAcademicSemesterLoading } = useGetAllAcademicSemestersQuery(undefined);
+    const [createStudent, { data, isError, error }] = useCreateStudentMutation();
 
     const academicDepartmentOptions = academicDepartments?.data?.data?.map(academicDepartment => ({
         label: academicDepartment.name,
@@ -54,12 +52,23 @@ const CreateStudent = () => {
         value: academicSemester._id,
     }));
 
-    const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        console.log(data);
+    console.log(data);
+    console.log(isError);
+    console.log(error);
 
-        // const formData = new FormData();
-        // formData.append("data", JSON.stringify(data));
-        // console.log(Object.fromEntries(formData));
+    // upload data on the server
+    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+        const studentFormData = new FormData();
+        const student = {
+            password: "student",
+            student: data
+        };
+
+        studentFormData.append("file", data?.avatar);
+        delete student.student.avatar;
+        studentFormData.append("data", JSON.stringify(student));
+        
+        createStudent(studentFormData);
     };
 
     return (
@@ -67,7 +76,6 @@ const CreateStudent = () => {
             <Col span={24}>
                 <CustomForm
                     onSubmit={onSubmit}
-                    resolver={zodResolver(studentSchema)}
                     defaultValues={defaultStudentFormValues}
                 >
                     <CustomForm.Title>Create Studnt</CustomForm.Title>
@@ -84,10 +92,31 @@ const CreateStudent = () => {
                             <CustomField type="text" label="Last Name" name="name.lastName" isRequired />
                         </Col>
                         <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                            <CustomSelect label="Gender" name="gender" options={genderOptions} isRequired />
+                            <CustomSelect label="Gender" name="gender" options={genderOptions} isRequired={true} />
                         </Col>
                         <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
                             <CustomSelect label="Blood Group" name="bloodGroup" options={bloodGroupOptions} />
+                        </Col>
+                        <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+                            <CustomDatePicker label="Date of Birth" name="dateOfBirth" isRequired={true} />
+                        </Col>
+                        <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+                            <Controller
+                                name="avatar"
+                                render={({ field: { onChange, value, ...field } }) => (
+                                    <Form.Item label="Picture:">
+                                        <Input
+                                            {...field}
+                                            value={value?.fileName}
+                                            type="file"
+                                            id="avatar"
+                                            size="large"
+                                            style={{ fontFamily: "Poppins" }}
+                                            onChange={(e) => onChange(e.target.files?.[0])}
+                                        />
+                                    </Form.Item>
+                                )}
+                            />
                         </Col>
                     </Row>
 

@@ -7,6 +7,8 @@ import { bloodGroupOptions, genderOptions } from "../../../constants/userManagem
 import { useGetAllAcademicDepartmentsQuery, useGetAllAcademicSemestersQuery } from "../../../redux/features/admin/academicManagement.api";
 import CustomDatePicker from "../../../components/ui/CustomDatePicker";
 import { useCreateStudentMutation } from "../../../redux/features/admin/userManagement.api";
+import { toast } from "sonner";
+import uploadImage from "../../../utils/uploadImage";
 
 const defaultStudentFormValues = {
     name: {
@@ -40,7 +42,7 @@ const defaultStudentFormValues = {
 const CreateStudent = () => {
     const { data: academicDepartments, isLoading: isAcademicDepartmentLoading } = useGetAllAcademicDepartmentsQuery(undefined);
     const { data: academicSemesters, isLoading: isAcademicSemesterLoading } = useGetAllAcademicSemestersQuery(undefined);
-    const [createStudent, { data, isError, error }] = useCreateStudentMutation();
+    const [createStudent] = useCreateStudentMutation();
 
     const academicDepartmentOptions = academicDepartments?.data?.data?.map(academicDepartment => ({
         label: academicDepartment.name,
@@ -52,23 +54,48 @@ const CreateStudent = () => {
         value: academicSemester._id,
     }));
 
-    console.log(data);
-    console.log(isError);
-    console.log(error);
+    // upload data on the server (server image upload)
+    // const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    //     const toastId = toast.loading("Creating student...");
 
-    // upload data on the server
-    const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        const studentFormData = new FormData();
+    //     const studentFormData = new FormData();
+    //     const student = {
+    //         password: "student",
+    //         student: data
+    //     };
+    //     delete student.student.avatar;
+
+    //     try {
+    //         studentFormData.append("file", data?.avatar);
+    //         studentFormData.append("data", JSON.stringify(student));
+    //         const res = await createStudent(studentFormData).unwrap();
+    //         toast.success(res?.message, { id: toastId, duration: 2000 });
+    //     } catch (err: any) {
+    //         toast.error(err?.message || err?.data?.message, { id: toastId });
+    //     };
+    // };
+
+    // upload data on the server (client image upload)
+    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+        const toastId = toast.loading("Creating student...");
         const student = {
             password: "student",
             student: data
         };
 
-        studentFormData.append("file", data?.avatar);
-        delete student.student.avatar;
-        studentFormData.append("data", JSON.stringify(student));
-        
-        createStudent(studentFormData);
+        try {
+            const imgUrl = await uploadImage(data?.avatar);
+            if (imgUrl) {
+                student.student.avatar = imgUrl;
+            } else {
+                delete student.student.avatar;
+            }
+
+            const res = await createStudent(student).unwrap();
+            toast.success(res?.message, { id: toastId, duration: 2000 });
+        } catch (err: any) {
+            toast.error(err?.message || err?.data?.message, { id: toastId });
+        };
     };
 
     return (
@@ -78,7 +105,7 @@ const CreateStudent = () => {
                     onSubmit={onSubmit}
                     defaultValues={defaultStudentFormValues}
                 >
-                    <CustomForm.Title>Create Studnt</CustomForm.Title>
+                    <CustomForm.Title>Create Student</CustomForm.Title>
 
                     <Divider>Personal Info</Divider>
                     <Row gutter={10}>

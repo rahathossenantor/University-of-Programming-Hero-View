@@ -26,7 +26,7 @@ const Students = () => {
         {
             title: "Image",
             render: (student) => (
-                <img src={student.avatar} alt="avatar" style={{ width: 50, height: 50, borderRadius: "50%" }} />
+                <img src={student.avatar} alt="avatar" style={{ width: 50, height: 50, borderRadius: "50%", objectFit: "cover" }} />
             ),
             width: "1%",
         },

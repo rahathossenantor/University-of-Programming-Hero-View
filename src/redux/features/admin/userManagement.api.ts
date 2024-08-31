@@ -34,10 +34,17 @@ const userManagementApi = baseApi.injectEndpoints({
                 };
             },
         }),
+        getSingleStudent: builder.query({
+            query: (id: string) => ({
+                url: `/students/${id}`,
+                method: "GET",
+            }),
+        }),
     }),
 });
 
 export const {
     useCreateStudentMutation,
     useGetAllStudentsQuery,
+    useGetSingleStudentQuery,
 } = userManagementApi;

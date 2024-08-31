@@ -6,13 +6,17 @@ const imgApi = `https://api.imgbb.com/1/upload?key=${imgApiKey}`;
 const uploadImage = async (image: any) => {
     const imageFile = { image };
     try {
-        const res = await axios.post(imgApi, imageFile, {
-            headers: {
-                "Content-Type": "multipart/form-data"
-            }
-        });
-        if (res.data.success) {
-            return res?.data?.data?.display_url;
+        if (image) {
+            const res = await axios.post(imgApi, imageFile, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            });
+            if (res?.data?.success) {
+                return res?.data?.data?.display_url;
+            } else {
+                throw new Error("Image upload failed!");
+            };
         }
         return null;
     } catch (err: any) {

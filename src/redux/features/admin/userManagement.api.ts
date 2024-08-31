@@ -4,6 +4,15 @@ import baseApi from "../../api/baseApi";
 
 const userManagementApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
+        // admin APIs
+        createAdmin: builder.mutation({
+            query: (admin) => ({
+                url: "/users/create-admin",
+                method: "POST",
+                body: admin,
+            })
+        }),
+
         // student APIs
         createStudent: builder.mutation({
             query: (student) => ({
@@ -44,6 +53,8 @@ const userManagementApi = baseApi.injectEndpoints({
 });
 
 export const {
+    useCreateAdminMutation,
+
     useCreateStudentMutation,
     useGetAllStudentsQuery,
     useGetSingleStudentQuery,

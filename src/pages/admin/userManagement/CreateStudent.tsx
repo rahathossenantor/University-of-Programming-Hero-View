@@ -10,36 +10,6 @@ import { useCreateStudentMutation } from "../../../redux/features/admin/userMana
 import { toast } from "sonner";
 import uploadImage from "../../../utils/uploadImage";
 
-const defaultStudentFormValues = {
-    name: {
-        firstName: "Yousuf",
-        middleName: "",
-        lastName: "Hossain"
-    },
-    // dateOfBirth: "2009-03-02",
-    gender: "Male",
-    bloodGroup: "O-",
-    email: "ankyousuf02@gmail.com",
-    contactNo: "+8801861816964",
-    emergencyContactNo: "+8801861816964",
-    presentAddress: "Mirpur-2, Dhaka, Bangladesh.",
-    permanentAddress: "Hemayetpur, Savar, Dhaka, Bangladesh.",
-    parents: {
-        fatherName: "Pannu Molla",
-        fatherOccupation: "Businessman",
-        fatherContactNo: "+8801862117052",
-        motherName: "Shahana Begum",
-        motherOccupation: "Housewife",
-        motherContactNo: "+8801882576525"
-    },
-    guardian: {
-        name: "Pannu Molla",
-        occupation: "Businessman",
-        contactNo: "+8801862117052",
-        address: "Hemayetpur, Savar, Dhaka, Bangladesh."
-    },
-};
-
 const CreateStudent = () => {
     const { data: academicDepartments, isLoading: isAcademicDepartmentLoading } = useGetAllAcademicDepartmentsQuery(undefined);
     const { data: academicSemesters, isLoading: isAcademicSemesterLoading } = useGetAllAcademicSemestersQuery(undefined);
@@ -104,7 +74,6 @@ const CreateStudent = () => {
             <Col span={24}>
                 <CustomForm
                     onSubmit={onSubmit}
-                    defaultValues={defaultStudentFormValues}
                 >
                     <CustomForm.Title>Create Student</CustomForm.Title>
 

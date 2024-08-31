@@ -5,27 +5,33 @@ import CustomSelect from "../../../components/ui/CustomSelect";
 import CustomDatePicker from "../../../components/ui/CustomDatePicker";
 import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
 import { bloodGroupOptions, designationOptions, genderOptions } from "../../../constants/userManagement.constants";
-
-const defaultAdminFormValues = {
-    name: {
-        firstName: "Gias Uddin",
-        middleName: "Ahamed",
-        lastName: "Talukder"
-    },
-    // dateOfBirth: "1963-03-01",
-    gender: "Male",
-    bloodGroup: "O+",
-    designation: "Professor",
-    email: "giasuddin@gmail.com",
-    contactNo: "+8801733774338",
-    emergencyContactNo: "+8801733774338",
-    presentAddress: "Adarsha Nagar, Middle Badda, Dhaka-1212, Bangladesh.",
-    permanentAddress: "Char Afzal, Bibir Hat-3732, Ramagati, Lakshmipur, Bangladesh.",
-};
+import { useCreateAdminMutation } from "../../../redux/features/admin/userManagement.api";
+import { toast } from "sonner";
+import uploadImage from "../../../utils/uploadImage";
 
 const CreateAdmin = () => {
+    const [createAdmin] = useCreateAdminMutation();
+
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-        console.log(data);
+        const toastId = toast.loading("Creating admin...");
+        const admin = {
+            password: "admin",
+            admin: data
+        };
+
+        try {
+            const imgUrl = await uploadImage(data?.avatar);
+            if (imgUrl) {
+                admin.admin.avatar = imgUrl;
+            } else {
+                delete admin.admin.avatar;
+            }
+
+            const res = await createAdmin(admin).unwrap();
+            toast.success(res?.message, { id: toastId, duration: 2000 });
+        } catch (err: any) {
+            toast.error(err?.message || err?.data?.message, { id: toastId });
+        };
     };
 
     return (
@@ -33,7 +39,6 @@ const CreateAdmin = () => {
             <Col span={24}>
                 <CustomForm
                     onSubmit={onSubmit}
-                    defaultValues={defaultAdminFormValues}
                 >
                     <CustomForm.Title>Create Admin</CustomForm.Title>
 

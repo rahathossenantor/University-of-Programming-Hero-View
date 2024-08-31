@@ -6,6 +6,9 @@ import CustomSelect from "../../../components/ui/CustomSelect";
 import { bloodGroupOptions, designationOptions, genderOptions } from "../../../constants/userManagement.constants";
 import CustomDatePicker from "../../../components/ui/CustomDatePicker";
 import { useGetAllAcademicDepartmentsQuery } from "../../../redux/features/admin/academicManagement.api";
+import { useCreateFacultyMutation } from "../../../redux/features/admin/userManagement.api";
+import { toast } from "sonner";
+import uploadImage from "../../../utils/uploadImage";
 
 const defaultFacultyFormValues = {
     name: {
@@ -26,13 +29,34 @@ const defaultFacultyFormValues = {
 
 const CreateFaculty = () => {
     const { data: academicDepartments, isLoading: isAcademicDepartmentLoading } = useGetAllAcademicDepartmentsQuery(undefined);
+    const [createFaculty] = useCreateFacultyMutation();
+
     const academicDepartmentOptions = academicDepartments?.data?.map(academicDepartment => ({
         label: academicDepartment.name,
         value: academicDepartment._id,
     }));
 
-    const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        console.log(data);
+    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+        const toastId = toast.loading("Creating faculty...");
+        const faculty = {
+            password: "faculty",
+            faculty: data
+        };
+
+        try {
+            const imgUrl = await uploadImage(data?.avatar);
+            if (imgUrl) {
+                faculty.faculty.avatar = imgUrl;
+            } else {
+                delete faculty.faculty.avatar;
+            }
+
+            const res = await createFaculty(faculty).unwrap();
+            console.log(res);
+            toast.success(res?.message, { id: toastId, duration: 2000 });
+        } catch (err: any) {
+            toast.error(err?.message || err?.data?.message, { id: toastId });
+        };
     };
 
     return (

@@ -1,6 +1,15 @@
 import { BaseQueryApi } from "@reduxjs/toolkit/query";
 import React, { ReactNode } from "react";
 
+export type TRole = "super-admin" | "admin" | "faculty" | "student";
+
+export type TUser = {
+    id: string;
+    role: string;
+    iat: number;
+    exp: number;
+};
+
 export type TErrorRes = {
     data: {
         success: boolean;
@@ -36,16 +45,7 @@ export type TItem = {
     children?: TItem[];
 };
 
-export type TUser = {
-    id: string;
-    role: string;
-    iat: number;
-    exp: number;
-};
-
 export type TQueryParam = {
     name: string;
     value: boolean | React.Key;
 };
-
-export type TRole = "super-admin" | "admin" | "faculty" | "student";

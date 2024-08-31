@@ -1,17 +1,17 @@
-import { Table } from "antd";
+import { Table, TableColumnsType } from "antd";
 import { useGetAllAcademicFacultiesQuery } from "../../../redux/features/admin/academicManagement.api";
 
-const columns = [
+const columns: TableColumnsType<any> = [
     {
         title: "Faculty",
-        dataIndex: "name"
+        dataIndex: "name",
     },
 ];
 
 const AcademicFaculties = () => {
     const { data, isFetching } = useGetAllAcademicFacultiesQuery(undefined);
 
-    const academicFaculties = data?.data?.data.map(({ _id, name }) => ({
+    const academicFaculties = data?.data?.map(({ _id, name }) => ({
         key: _id,
         name
     }));

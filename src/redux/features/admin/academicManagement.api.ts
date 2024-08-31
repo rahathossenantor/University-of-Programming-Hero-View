@@ -1,4 +1,4 @@
-import { TAcademicDepartmentRes, TAcademicFacultyRes, TAcademicSemesterRes } from "../../../types/academicMangement.types";
+import { TAcademicDepartment, TAcademicFaculty, TAcademicSemester } from "../../../types/academicMangement.types";
 import { TDataResWithRedux, TQueryParam } from "../../../types/types.global";
 import baseApi from "../../api/baseApi";
 
@@ -9,8 +9,8 @@ const academicManagementApi = baseApi.injectEndpoints({
             query: (academicSemester) => ({
                 url: "/academic-semesters/create-academic-semester",
                 method: "POST",
-                body: academicSemester
-            })
+                body: academicSemester,
+            }),
         }),
         getAllAcademicSemesters: builder.query({
             query: (queryParams?: TQueryParam[]) => {
@@ -19,41 +19,20 @@ const academicManagementApi = baseApi.injectEndpoints({
                     queryParams.forEach((query: TQueryParam) => {
                         params.append(query.name, query.value as string);
                     });
-                }
+                };
 
                 return {
                     url: "/academic-semesters",
                     method: "GET",
-                    params
+                    params,
                 };
             },
-            transformResponse: (response: TDataResWithRedux<TAcademicSemesterRes[]>) => {
+            transformResponse: (response: TDataResWithRedux<TAcademicSemester[]>) => {
                 return {
-                    data: response?.data,
+                    data: response?.data?.data,
                     meta: response?.data?.meta,
                 };
-            }
-        }),
-
-        // academic faculty APIs
-        createAcademicFaculty: builder.mutation({
-            query: (academicFaculty) => ({
-                url: "/academic-faculties/create-academic-faculty",
-                method: "POST",
-                body: academicFaculty
-            })
-        }),
-        getAllAcademicFaculties: builder.query({
-            query: () => ({
-                url: "/academic-faculties",
-                method: "GET"
-            }),
-            transformResponse: (response: TDataResWithRedux<TAcademicFacultyRes[]>) => {
-                return {
-                    data: response?.data,
-                    meta: response?.data?.meta,
-                };
-            }
+            },
         }),
 
         // academic department APIs
@@ -61,22 +40,43 @@ const academicManagementApi = baseApi.injectEndpoints({
             query: (academicDepartment) => ({
                 url: "/academic-departments/create-academic-department",
                 method: "POST",
-                body: academicDepartment
-            })
+                body: academicDepartment,
+            }),
         }),
         getAllAcademicDepartments: builder.query({
             query: () => ({
                 url: "/academic-departments",
-                method: "GET"
+                method: "GET",
             }),
-            transformResponse: (response: TDataResWithRedux<TAcademicDepartmentRes[]>) => {
+            transformResponse: (response: TDataResWithRedux<TAcademicDepartment[]>) => {
                 return {
-                    data: response?.data,
+                    data: response?.data?.data,
+                    meta: response?.data?.meta,
+                };
+            },
+        }),
+
+        // academic faculty APIs
+        createAcademicFaculty: builder.mutation({
+            query: (academicFaculty) => ({
+                url: "/academic-faculties/create-academic-faculty",
+                method: "POST",
+                body: academicFaculty,
+            }),
+        }),
+        getAllAcademicFaculties: builder.query({
+            query: () => ({
+                url: "/academic-faculties",
+                method: "GET",
+            }),
+            transformResponse: (response: TDataResWithRedux<TAcademicFaculty[]>) => {
+                return {
+                    data: response?.data?.data,
                     meta: response?.data?.meta,
                 };
             }
         }),
-    })
+    }),
 });
 
 export const {

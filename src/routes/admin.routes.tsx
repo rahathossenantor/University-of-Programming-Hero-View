@@ -10,6 +10,7 @@ import CreateAcademicFaculty from "../pages/admin/academicManagement/CreateAcade
 import AcademicFaculties from "../pages/admin/academicManagement/AcademicFaculties";
 import CreateAcademicDepartment from "../pages/admin/academicManagement/CreateAcademicDepartment";
 import AcademicDepartments from "../pages/admin/academicManagement/AcademicDepartments";
+import Students from "../pages/admin/userManagement/Students";
 
 const userManagementPaths = [
     {
@@ -26,6 +27,11 @@ const userManagementPaths = [
         name: "Create Student",
         path: "create-student",
         element: <CreateStudent />
+    },
+    {
+        name: "Students",
+        path: "students",
+        element: <Students />
     },
 ];
 

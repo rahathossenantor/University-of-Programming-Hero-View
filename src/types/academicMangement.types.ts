@@ -1,19 +1,26 @@
-export type TAcademicSemesterRes = {
+export type TAcademicSemester = {
     _id: string;
     name: string;
     code: string;
     year: string;
     startMonth: string;
     endMonth: string;
+    __v: number;
 };
 
-export type TAcademicFacultyRes = {
+export type TAcademicDepartment = {
     _id: string;
     name: string;
+    academicFaculty: TAcademicFaculty;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
 };
 
-export type TAcademicDepartmentRes = {
+export type TAcademicFaculty = {
     _id: string;
     name: string;
-    academicFaculty: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
 };

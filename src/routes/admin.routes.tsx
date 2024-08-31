@@ -11,29 +11,34 @@ import AcademicFaculties from "../pages/admin/academicManagement/AcademicFaculti
 import CreateAcademicDepartment from "../pages/admin/academicManagement/CreateAcademicDepartment";
 import AcademicDepartments from "../pages/admin/academicManagement/AcademicDepartments";
 import Students from "../pages/admin/userManagement/Students";
+import StudentDetails from "../pages/admin/userManagement/StudentDetails";
 
 const userManagementPaths = [
-    {
-        name: "Create Admin",
-        path: "create-admin",
-        element: <CreateAdmin />
-    },
-    {
-        name: "Create Faculty",
-        path: "create-faculty",
-        element: <CreateFaculty />
-    },
-    {
-        name: "Create Student",
-        path: "create-student",
-        element: <CreateStudent />
-    },
-    {
-        name: "Students",
-        path: "students",
-        element: <Students />
-    },
-];
+        {
+            name: "Create Admin",
+            path: "create-admin",
+            element: <CreateAdmin />
+        },
+        {
+            name: "Create Faculty",
+            path: "create-faculty",
+            element: <CreateFaculty />
+        },
+        {
+            name: "Create Student",
+            path: "create-student",
+            element: <CreateStudent />
+        },
+        {
+            path: "students/student-details/:id",
+            element: <StudentDetails />
+        },
+        {
+            name: "Students",
+            path: "students",
+            element: <Students />
+        },
+    ];
 
 const academicManagementPaths = [
     {

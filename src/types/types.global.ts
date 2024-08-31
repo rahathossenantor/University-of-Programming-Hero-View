@@ -39,7 +39,7 @@ export type TDataRes<T> = {
 export type TDataResWithRedux<T> = TDataRes<T> & BaseQueryApi;
 
 export type TItem = {
-    name: string;
+    name?: string;
     path?: string;
     element?: ReactNode;
     children?: TItem[];

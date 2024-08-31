@@ -12,30 +12,31 @@ import uploadImage from "../../../utils/uploadImage";
 
 const defaultStudentFormValues = {
     name: {
-        firstName: "Sidratul",
+        firstName: "Yousuf",
         middleName: "",
-        lastName: "Muntaha"
+        lastName: "Hossain"
     },
-    gender: "Female",
+    // dateOfBirth: "2009-03-02",
+    gender: "Male",
     bloodGroup: "O-",
-    email: "sidratul.muntaha@gmail.com",
-    contactNo: "+8801986523489",
-    emergencyContactNo: "+8801986523489",
-    presentAddress: "Shiddhirganj, Narayanganj, Bangladesh.",
-    permanentAddress: "Mirsharai, Chattogram, Bangladesh.",
+    email: "ankyousuf02@gmail.com",
+    contactNo: "+8801861816964",
+    emergencyContactNo: "+8801861816964",
+    presentAddress: "Mirpur-2, Dhaka, Bangladesh.",
+    permanentAddress: "Hemayetpur, Savar, Dhaka, Bangladesh.",
     parents: {
-        fatherName: "Gias Uddin Ahmed Talukdar",
+        fatherName: "Pannu Molla",
         fatherOccupation: "Businessman",
-        fatherContactNo: "+8801719180689",
-        motherName: "Nazmun Nahar",
+        fatherContactNo: "+8801862117052",
+        motherName: "Shahana Begum",
         motherOccupation: "Housewife",
-        motherContactNo: "+8801849995953"
+        motherContactNo: "+8801882576525"
     },
     guardian: {
-        name: "Gias Uddin Ahmed Talukdar",
+        name: "Pannu Molla",
         occupation: "Businessman",
-        contactNo: "+8801719180689",
-        address: "Shiddhirganj, Narayanganj, Bangladesh."
+        contactNo: "+8801862117052",
+        address: "Hemayetpur, Savar, Dhaka, Bangladesh."
     },
 };
 
@@ -44,12 +45,12 @@ const CreateStudent = () => {
     const { data: academicSemesters, isLoading: isAcademicSemesterLoading } = useGetAllAcademicSemestersQuery(undefined);
     const [createStudent] = useCreateStudentMutation();
 
-    const academicDepartmentOptions = academicDepartments?.data?.data?.map(academicDepartment => ({
+    const academicDepartmentOptions = academicDepartments?.data?.map(academicDepartment => ({
         label: academicDepartment.name,
         value: academicDepartment._id,
     }));
 
-    const academicSemesterOptions = academicSemesters?.data?.data?.map(academicSemester => ({
+    const academicSemesterOptions = academicSemesters?.data?.map(academicSemester => ({
         label: `${academicSemester.name} ${academicSemester.year}`,
         value: academicSemester._id,
     }));

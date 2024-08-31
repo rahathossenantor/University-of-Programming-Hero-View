@@ -1,8 +1,14 @@
-import { Button, Space, Table, TableColumnsType } from "antd";
+import { Button, Pagination, Space, Table, TableColumnsType } from "antd";
 import { useGetAllStudentsQuery } from "../../../redux/features/admin/userManagement.api";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Students = () => {
-    const { data, isFetching } = useGetAllStudentsQuery(undefined);
+    const [page, setPage] = useState(1);
+    const { data, isFetching } = useGetAllStudentsQuery([
+        { name: "page", value: page },
+        { name: "sort", value: "id" },
+    ]);
 
     const students = data?.data?.map(({ _id, id, avatar, fullName, gender, dateOfBirth, email, parents }) => ({
         key: _id,
@@ -14,12 +20,13 @@ const Students = () => {
         email,
         father: parents.fatherName,
     }));
+    const metaData = data?.meta;
 
     const columns: TableColumnsType<any> = [
         {
             title: "Image",
-            render: (_, record) => (
-                <img src={record.avatar} alt="avatar" style={{ width: 50, height: 50, borderRadius: "50%" }} />
+            render: (student) => (
+                <img src={student.avatar} alt="avatar" style={{ width: 50, height: 50, borderRadius: "50%" }} />
             ),
             width: "1%",
         },
@@ -50,11 +57,13 @@ const Students = () => {
         },
         {
             title: "Actions",
-            render: (_, record) => (
+            render: (student) => (
                 <Space>
-                    <Button onClick={() => console.log(record.key)}>Details</Button>
-                    <Button onClick={() => console.log(record.key)}>Update</Button>
-                    <Button onClick={() => console.log(record.key)}>Block</Button>
+                    <Link to={`student-details/${student?.key}`}>
+                        <Button>Details</Button>
+                    </Link>
+                    <Button>Update</Button>
+                    <Button>Block</Button>
                 </Space>
             ),
             width: "1%",
@@ -62,12 +71,21 @@ const Students = () => {
     ];
 
     return (
-        <Table
-            style={{ overflowY: "scroll" }}
-            loading={isFetching}
-            columns={columns}
-            dataSource={students}
-        />
+        <>
+            <Table
+                style={{ overflowY: "scroll" }}
+                loading={isFetching}
+                columns={columns}
+                dataSource={students}
+                pagination={false}
+            />
+            <Pagination
+                current={page}
+                onChange={(pg) => setPage(pg)}
+                pageSize={metaData?.limit}
+                total={metaData?.totalDocs}
+            />
+        </>
     );
 };
 

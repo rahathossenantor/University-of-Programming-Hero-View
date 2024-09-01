@@ -4,26 +4,17 @@ import CustomField from "../../../components/ui/CustomField";
 import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
 import CustomSelect from "../../../components/ui/CustomSelect";
 import { bloodGroupOptions, genderOptions } from "../../../constants/userManagement.constants";
-import { useGetAllAcademicDepartmentsQuery, useGetAllAcademicSemestersQuery } from "../../../redux/features/admin/academicManagement.api";
 import CustomDatePicker from "../../../components/ui/CustomDatePicker";
 import { useCreateStudentMutation } from "../../../redux/features/admin/userManagement.api";
 import { toast } from "sonner";
 import uploadImage from "../../../utils/uploadImage";
+import useAcademicSemesterOptions from "../../../hooks/useAcademicSemesterOptions";
+import useAcademicDepartmentOptions from "../../../hooks/useAcademicDepartmentOptions";
 
 const CreateStudent = () => {
-    const { data: academicDepartments, isLoading: isAcademicDepartmentLoading } = useGetAllAcademicDepartmentsQuery(undefined);
-    const { data: academicSemesters, isLoading: isAcademicSemesterLoading } = useGetAllAcademicSemestersQuery(undefined);
+    const { academicDepartmentOptions, isAcademicDepartmentLoading } = useAcademicDepartmentOptions();
+    const { academicSemesterOptions, isAcademicSemesterLoading } = useAcademicSemesterOptions();
     const [createStudent] = useCreateStudentMutation();
-
-    const academicDepartmentOptions = academicDepartments?.data?.map(academicDepartment => ({
-        label: academicDepartment.name,
-        value: academicDepartment._id,
-    }));
-
-    const academicSemesterOptions = academicSemesters?.data?.map(academicSemester => ({
-        label: `${academicSemester.name} ${academicSemester.year}`,
-        value: academicSemester._id,
-    }));
 
     // upload data on the server (server image upload)
     // const onSubmit: SubmitHandler<FieldValues> = async (data) => {

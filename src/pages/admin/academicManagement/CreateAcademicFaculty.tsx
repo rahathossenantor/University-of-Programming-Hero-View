@@ -19,7 +19,7 @@ const CreateAcademicFaculty = () => {
             toast.success(res?.message, { id: toastId });
         } catch (err: any) {
             toast.error(err?.data?.message, { id: toastId });
-        }
+        };
     };
 
     return (

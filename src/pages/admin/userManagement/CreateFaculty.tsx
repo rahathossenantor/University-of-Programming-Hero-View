@@ -5,10 +5,10 @@ import CustomField from "../../../components/ui/CustomField";
 import CustomSelect from "../../../components/ui/CustomSelect";
 import { bloodGroupOptions, designationOptions, genderOptions } from "../../../constants/userManagement.constants";
 import CustomDatePicker from "../../../components/ui/CustomDatePicker";
-import { useGetAllAcademicDepartmentsQuery } from "../../../redux/features/admin/academicManagement.api";
 import { useCreateFacultyMutation } from "../../../redux/features/admin/userManagement.api";
 import { toast } from "sonner";
 import uploadImage from "../../../utils/uploadImage";
+import useAcademicDepartmentOptions from "../../../hooks/useAcademicDepartmentOptions";
 
 const defaultFacultyFormValues = {
     name: {
@@ -28,13 +28,8 @@ const defaultFacultyFormValues = {
 };
 
 const CreateFaculty = () => {
-    const { data: academicDepartments, isLoading: isAcademicDepartmentLoading } = useGetAllAcademicDepartmentsQuery(undefined);
+    const { academicDepartmentOptions, isAcademicDepartmentLoading } = useAcademicDepartmentOptions();
     const [createFaculty] = useCreateFacultyMutation();
-
-    const academicDepartmentOptions = academicDepartments?.data?.map(academicDepartment => ({
-        label: academicDepartment.name,
-        value: academicDepartment._id,
-    }));
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         const toastId = toast.loading("Creating faculty...");

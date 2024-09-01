@@ -4,28 +4,24 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CustomSelect from "../../../components/ui/CustomSelect";
 import { academicDepartmentSchema } from "../../../schemas/academicManagement.schema";
-import { useCreateAcademicDepartmentMutation, useGetAllAcademicFacultiesQuery } from "../../../redux/features/admin/academicManagement.api";
+import { useCreateAcademicDepartmentMutation } from "../../../redux/features/admin/academicManagement.api";
 import { departmentOptions } from "../../../constants/academicManagement.constants";
 import { toast } from "sonner";
+import useAcademicFacultyOptions from "../../../hooks/useAcademicFacultyOptions";
 
 const CreateAcademicDepartment = () => {
-    const { data, isLoading } = useGetAllAcademicFacultiesQuery(undefined);
+    const { academicFacultyOptions, isAcademicFacultyLoading } = useAcademicFacultyOptions();
     const [createAcademicDepartment] = useCreateAcademicDepartmentMutation();
-    
-    const facultiesForDepartmentOptions = data?.data?.data?.map(faculty => ({
-        label: faculty.name,
-        value: faculty._id,
-    }));
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         const toastId = toast.loading("Createing academic department...");
-        
+
         try {
             const res = await createAcademicDepartment(data).unwrap();
             toast.success(res?.message, { id: toastId });
         } catch (err: any) {
             toast.error(err?.data?.message, { id: toastId });
-        }
+        };
     };
 
     return (
@@ -45,7 +41,7 @@ const CreateAcademicDepartment = () => {
                     >
                         <CustomForm.Title>Create Academic Department</CustomForm.Title>
                         <CustomSelect name="name" label="Department" options={departmentOptions} isRequired />
-                        <CustomSelect name="academicFaculty" label="Faculty" options={facultiesForDepartmentOptions!} disabled={isLoading} isRequired />
+                        <CustomSelect name="academicFaculty" label="Faculty" options={academicFacultyOptions!} disabled={isAcademicFacultyLoading} isRequired />
                         <Button htmlType="submit" style={{ fontSize: "15px" }}>Submit</Button>
                     </div>
                 </CustomForm>

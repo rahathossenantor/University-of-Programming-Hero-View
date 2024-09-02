@@ -33,7 +33,6 @@ const Students = () => {
         {
             title: "Role",
             dataIndex: "role",
-            width: "1%",
         },
         {
             title: "Name",
@@ -66,7 +65,6 @@ const Students = () => {
                     <Button>Block</Button>
                 </Space>
             ),
-            width: "1%",
         },
     ];
 

@@ -1,5 +1,4 @@
-import { TCourse } from "../../../constants/courseManagement.constants";
-import { TSemesterRegistration } from "../../../types/courseManagement.types";
+import { TCourse, TSemesterRegistration } from "../../../types/courseManagement.types";
 import { TDataResWithRedux, TQueryParam } from "../../../types/types.global";
 import baseApi from "../../api/baseApi";
 
@@ -77,4 +76,6 @@ export const {
     useCreateSemesterRegistrationMutation,
     useGetAllSemesterRegistrationsQuery,
     useUpdateSemesterRegistrationStatusMutation,
+
+    useGetAllCoursesQuery,
 } = courseManagementApi;

@@ -2,6 +2,7 @@ import { Form, Select } from "antd";
 import { Controller } from "react-hook-form";
 
 type TCustomSelectProps = {
+    mode?: "multiple",
     name: string,
     label: string,
     options: {
@@ -13,7 +14,7 @@ type TCustomSelectProps = {
     isRequired?: boolean;
 };
 
-const CustomSelect = ({ name, label, options, disabled, isRequired = false }: TCustomSelectProps) => {
+const CustomSelect = ({ mode, name, label, options, disabled, isRequired = false }: TCustomSelectProps) => {
     return (
         <Controller
             name={name}
@@ -21,6 +22,7 @@ const CustomSelect = ({ name, label, options, disabled, isRequired = false }: TC
                 <Form.Item label={`${label}: ${isRequired ? "*" : ""}`}>
                     <Select
                         {...field}
+                        mode={mode}
                         disabled={disabled}
                         size="large"
                         style={{ width: "100%" }}

@@ -1,7 +1,8 @@
 import { Button, Dropdown, MenuProps, Table, Tag } from "antd";
-import { useGetAllSemesterRegistrationsQuery } from "../../../redux/features/admin/courseManagement.api";
+import { useGetAllSemesterRegistrationsQuery, useUpdateSemesterRegistrationStatusMutation } from "../../../redux/features/admin/courseManagement.api";
 import moment from "moment";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const items: MenuProps["items"] = [
     {
@@ -18,6 +19,7 @@ const SemesterRagistrations = () => {
     const [semesterRegistrationId, setSemesterRegistrationId] = useState("");
 
     const { data, isFetching } = useGetAllSemesterRegistrationsQuery([{ name: "sort", value: "createdAt" }]);
+    const [updateSemesterRegistrationStatus] = useUpdateSemesterRegistrationStatusMutation();
 
     const semesterRegistrations = data?.data?.map(({ _id, academicSemester, status, startDate, endDate, minCredit, maxCredit }) => ({
         key: _id,
@@ -29,15 +31,23 @@ const SemesterRagistrations = () => {
         maxCredit,
     }));
 
-    const handleSemesterRegistrationStatusChange = (event: { key: string }) => {
+    const handleSemesterRegistrationStatusChange = async (event: { key: string }) => {
+        const toastId = toast.loading("Updating semester registration status...");
         const data = {
             id: semesterRegistrationId,
             data: {
                 status: event.key,
             },
         };
-        console.log(data);
+
+        try {
+            const res = await updateSemesterRegistrationStatus(data).unwrap();
+            toast.success(res?.message, { id: toastId });
+        } catch (err: any) {
+            toast.error(err?.data?.message, { id: toastId });
+        };
     };
+
     const menuProps = {
         items,
         onClick: handleSemesterRegistrationStatusChange,
@@ -83,9 +93,15 @@ const SemesterRagistrations = () => {
         {
             title: "Actions",
             render: (semesterRegistration: any) => {
+                let isDisabled = false;
+                if (semesterRegistration.status === "ENDED") {
+                    isDisabled = true;
+                }
+
                 return (
                     <Dropdown menu={menuProps} trigger={["click"]}>
                         <Button
+                            disabled={isDisabled}
                             onClick={() => setSemesterRegistrationId(semesterRegistration.key)}
                         >Update Status</Button>
                     </Dropdown>

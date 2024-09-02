@@ -11,6 +11,7 @@ const academicManagementApi = baseApi.injectEndpoints({
                 method: "POST",
                 body: academicSemester,
             }),
+            invalidatesTags: ["academicSemesters"],
         }),
         getAllAcademicSemesters: builder.query({
             query: (queryParams?: TQueryParam[]) => {
@@ -27,6 +28,7 @@ const academicManagementApi = baseApi.injectEndpoints({
                     params,
                 };
             },
+            providesTags: ["academicSemesters"],
             transformResponse: (response: TDataResWithRedux<TAcademicSemester[]>) => {
                 return {
                     data: response?.data?.data,
@@ -42,12 +44,14 @@ const academicManagementApi = baseApi.injectEndpoints({
                 method: "POST",
                 body: academicDepartment,
             }),
+            invalidatesTags: ["academicDepartments"],
         }),
         getAllAcademicDepartments: builder.query({
             query: () => ({
                 url: "/academic-departments",
                 method: "GET",
             }),
+            providesTags: ["academicDepartments"],
             transformResponse: (response: TDataResWithRedux<TAcademicDepartment[]>) => {
                 return {
                     data: response?.data?.data,
@@ -63,12 +67,14 @@ const academicManagementApi = baseApi.injectEndpoints({
                 method: "POST",
                 body: academicFaculty,
             }),
+            invalidatesTags: ["academicFaculties"],
         }),
         getAllAcademicFaculties: builder.query({
             query: () => ({
                 url: "/academic-faculties",
                 method: "GET",
             }),
+            providesTags: ["academicFaculties"],
             transformResponse: (response: TDataResWithRedux<TAcademicFaculty[]>) => {
                 return {
                     data: response?.data?.data,

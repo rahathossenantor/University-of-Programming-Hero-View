@@ -28,7 +28,8 @@ const userManagementApi = baseApi.injectEndpoints({
                 url: "/users/create-student",
                 method: "POST",
                 body: student,
-            })
+            }),
+            invalidatesTags: ["students"],
         }),
         getAllStudents: builder.query({
             query: (queryParams?: TQueryParam[]) => {
@@ -45,6 +46,7 @@ const userManagementApi = baseApi.injectEndpoints({
                     params,
                 };
             },
+            providesTags: ["students"],
             transformResponse: (response: TDataResWithRedux<TStudent[]>) => {
                 return {
                     data: response?.data?.data,

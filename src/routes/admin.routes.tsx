@@ -13,6 +13,7 @@ import AcademicDepartments from "../pages/admin/academicManagement/AcademicDepar
 import Students from "../pages/admin/userManagement/Students";
 import StudentDetails from "../pages/admin/userManagement/StudentDetails";
 import CreateSemesterRegistration from "../pages/admin/courseManagement/CreateSemesterRegistration";
+import SemesterRagistrations from "../pages/admin/courseManagement/SemesterRagistrations";
 
 const userManagementPaths = [
         {
@@ -79,6 +80,11 @@ const courseManagementPaths = [
         name: "Create S. Registration",
         path: "create-semester-registration",
         element: <CreateSemesterRegistration />
+    },
+    {
+        name: "S. Registrations",
+        path: "semester-registrations",
+        element: <SemesterRagistrations />
     },
 ];
 

@@ -27,7 +27,7 @@ const courseManagementApi = baseApi.injectEndpoints({
                     params,
                 };
             },
-            transformResponse: (response: TDataResWithRedux<TSemesterRegistration>) => {
+            transformResponse: (response: TDataResWithRedux<TSemesterRegistration[]>) => {
                 return {
                     data: response?.data?.data,
                     meta: response?.data?.meta,

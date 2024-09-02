@@ -3,7 +3,6 @@ import CustomForm from "../../../components/ui/CustomForm";
 import CustomSelect from "../../../components/ui/CustomSelect";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import useAcademicSemesterOptions from "../../../hooks/useAcademicSemesterOptions";
-import { statusOptions } from "../../../constants/courseManagement.constants";
 import CustomDatePicker from "../../../components/ui/CustomDatePicker";
 import CustomField from "../../../components/ui/CustomField";
 import { useCreateSemesterRegistrationMutation } from "../../../redux/features/admin/courseManagement.api";
@@ -24,6 +23,7 @@ const CreateSemesterRegistration = () => {
         const toastId = toast.loading("Createing academic department...");
         const registeredSemester = {
             ...data,
+            status: "UPCOMING",
             minCredit: Number(data.minCredit),
             maxCredit: Number(data.maxCredit),
         };
@@ -52,7 +52,6 @@ const CreateSemesterRegistration = () => {
                 >
                     <CustomForm.Title>Semester Registration</CustomForm.Title>
                     <CustomSelect name="academicSemester" label="Academic Semester" options={academicSemesterOptions!} disabled={isAcademicSemesterLoading} isRequired />
-                    <CustomSelect name="status" label="Status" options={statusOptions} isRequired />
                     <CustomDatePicker name="startDate" label="Start Date" isRequired />
                     <CustomDatePicker name="endDate" label="End Date" isRequired />
                     <CustomField type="number" name="minCredit" label="Min Credit" isRequired />

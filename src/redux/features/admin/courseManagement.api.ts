@@ -1,3 +1,4 @@
+import { TCourse } from "../../../constants/courseManagement.constants";
 import { TSemesterRegistration } from "../../../types/courseManagement.types";
 import { TDataResWithRedux, TQueryParam } from "../../../types/types.global";
 import baseApi from "../../api/baseApi";
@@ -43,6 +44,31 @@ const courseManagementApi = baseApi.injectEndpoints({
                 body: args.data,
             }),
             invalidatesTags: ["semesterRegistrations"],
+        }),
+
+        // course APIs
+        getAllCourses: builder.query({
+            query: (queryParams?: TQueryParam[]) => {
+                const params = new URLSearchParams();
+                if (queryParams) {
+                    queryParams.forEach((query: TQueryParam) => {
+                        params.append(query.name, query.value as string);
+                    });
+                };
+
+                return {
+                    url: "/courses",
+                    method: "GET",
+                    params,
+                };
+            },
+            providesTags: ["courses"],
+            transformResponse: (response: TDataResWithRedux<TCourse[]>) => {
+                return {
+                    data: response?.data?.data,
+                    meta: response?.data?.meta,
+                };
+            },
         }),
     }),
 });

@@ -12,6 +12,7 @@ import CreateAcademicDepartment from "../pages/admin/academicManagement/CreateAc
 import AcademicDepartments from "../pages/admin/academicManagement/AcademicDepartments";
 import Students from "../pages/admin/userManagement/Students";
 import StudentDetails from "../pages/admin/userManagement/StudentDetails";
+import CreateSemesterRegistration from "../pages/admin/courseManagement/CreateSemesterRegistration";
 
 const userManagementPaths = [
         {
@@ -73,6 +74,14 @@ const academicManagementPaths = [
     },
 ];
 
+const courseManagementPaths = [
+    {
+        name: "Create S. Registration",
+        path: "create-semester-registration",
+        element: <CreateSemesterRegistration />
+    },
+];
+
 const adminPaths = [
     {
         name: "Dashboard",
@@ -86,7 +95,11 @@ const adminPaths = [
     {
         name: "Academic Management",
         children: academicManagementPaths,
-    }
+    },
+    {
+        name: "Course Management",
+        children: courseManagementPaths,
+    },
 ];
 export const adminRoutes = routesGenerator(adminPaths);
 export const adminSidebarItems = sidebarItemsGenerator(adminPaths, "admin");

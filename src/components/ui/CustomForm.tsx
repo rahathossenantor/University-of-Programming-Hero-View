@@ -14,6 +14,7 @@ type TFormProps = {
 
 const CustomForm = ({ children, onSubmit, defaultValues, resolver }: TFormProps) => {
     const formConfig: TFormConfig = {};
+    const methods = useForm(formConfig);
 
     if (defaultValues) {
         formConfig["defaultValues"] = defaultValues;
@@ -21,8 +22,6 @@ const CustomForm = ({ children, onSubmit, defaultValues, resolver }: TFormProps)
     if (resolver) {
         formConfig["resolver"] = resolver;
     }
-
-    const methods = useForm(formConfig);
 
     return (
         <FormProvider {...methods} >

@@ -5,11 +5,12 @@ import Register from "../pages/Register";
 import { adminRoutes } from "./admin.routes";
 import { facultyRoutes } from "./faculty.routes";
 import { studentRoutes } from "./student.routes";
+import RedirectUser from "../pages/RedirectUser";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <App />
+        element: <RedirectUser />,
     },
     {
         path: "/admin",

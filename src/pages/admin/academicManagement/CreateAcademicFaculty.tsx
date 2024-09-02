@@ -1,4 +1,4 @@
-import { Button, Col, Flex } from "antd";
+import { Button } from "antd";
 import CustomForm from "../../../components/ui/CustomForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CustomSelect from "../../../components/ui/CustomSelect";
@@ -7,6 +7,7 @@ import { facultyOptions } from "../../../constants/academicManagement.constants"
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import { useCreateAcademicFacultyMutation } from "../../../redux/features/admin/academicManagement.api";
+import CustomFormLayoutWrapper from "../../../components/layout/CustomFormLayoutWrapper";
 
 const CreateAcademicFaculty = () => {
     const [createAcademicFaculty] = useCreateAcademicFacultyMutation();
@@ -23,27 +24,25 @@ const CreateAcademicFaculty = () => {
     };
 
     return (
-        <Flex justify="center" align="center">
-            <Col span={6}>
-                <CustomForm
-                    onSubmit={onSubmit}
-                    resolver={zodResolver(academicFacultySchema)}
+        <CustomFormLayoutWrapper>
+            <CustomForm
+                onSubmit={onSubmit}
+                resolver={zodResolver(academicFacultySchema)}
+            >
+                <div
+                    style={{
+                        width: "500px",
+                        padding: "20px",
+                        borderRadius: "10px",
+                        boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)"
+                    }}
                 >
-                    <div
-                        style={{
-                            width: "500px",
-                            padding: "20px",
-                            borderRadius: "10px",
-                            boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)"
-                        }}
-                    >
-                        <CustomForm.Title>Create Academic Faculty</CustomForm.Title>
-                        <CustomSelect name="name" label="Faculty" options={facultyOptions} isRequired />
-                        <Button htmlType="submit" style={{ fontSize: "15px" }}>Submit</Button>
-                    </div>
-                </CustomForm>
-            </Col>
-        </Flex>
+                    <CustomForm.Title>Create Academic Faculty</CustomForm.Title>
+                    <CustomSelect name="name" label="Faculty" options={facultyOptions} isRequired />
+                    <Button htmlType="submit" style={{ fontSize: "15px" }}>Submit</Button>
+                </div>
+            </CustomForm>
+        </CustomFormLayoutWrapper>
     );
 };
 

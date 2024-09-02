@@ -15,7 +15,6 @@ const Login = () => {
     const navigate = useNavigate();
     const [login] = useLoginMutation();
 
-    // submit handler
     const onSubmit = async (data: FieldValues) => {
         const toastId = toast.loading("Loading...");
         try {

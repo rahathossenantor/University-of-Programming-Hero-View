@@ -4,6 +4,7 @@ import { adminSidebarItems } from "../../routes/admin.routes";
 import { facultySidebarItems } from "../../routes/faculty.routes";
 import { studentSidebarItems } from "../../routes/student.routes";
 import { useAppSelector } from "../../redux/hooks";
+import { ItemType, MenuItemType } from "antd/es/menu/interface";
 
 const { Sider } = Layout;
 
@@ -42,7 +43,8 @@ const Sidebar = () => {
             style={{
                 height: "100vh",
                 position: "sticky",
-                top: 0
+                top: 0,
+                zIndex: 10,
             }}
         >
             <div
@@ -57,7 +59,7 @@ const Sidebar = () => {
             >
                 <h1>University</h1>
             </div>
-            <Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]} items={sidebarItems} />
+            <Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]} items={sidebarItems as (ItemType<MenuItemType>[] | undefined)} />
         </Sider>
     );
 };

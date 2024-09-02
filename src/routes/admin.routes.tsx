@@ -45,7 +45,7 @@ const userManagementPaths = [
 const academicManagementPaths = [
     {
         name: "Create A. Semester",
-        path: "create-academic-semesters",
+        path: "create-academic-semester",
         element: <CreateAcademicSemester />
     },
     {

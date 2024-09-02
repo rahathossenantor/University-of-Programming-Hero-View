@@ -2,6 +2,7 @@ import { Button, Pagination, Space, Table, TableColumnsType } from "antd";
 import { useGetAllStudentsQuery } from "../../../redux/features/admin/userManagement.api";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const Students = () => {
     const [page, setPage] = useState(1);
@@ -10,15 +11,14 @@ const Students = () => {
         { name: "sort", value: "id" },
     ]);
 
-    const students = data?.data?.map(({ _id, id, avatar, fullName, gender, dateOfBirth, email, parents }) => ({
+    const students = data?.data?.map(({ _id, id, avatar, fullName, gender, dateOfBirth, email }) => ({
         key: _id,
         avatar,
         role: id,
         name: fullName,
         gender,
-        dateOfBirth: new Date(dateOfBirth).toISOString().slice(0, 10),
+        dateOfBirth: moment(new Date(dateOfBirth)).format("DD MMMM, YYYY"),
         email,
-        father: parents.fatherName,
     }));
     const metaData = data?.meta;
 
@@ -49,10 +49,6 @@ const Students = () => {
         {
             title: "Email",
             dataIndex: "email",
-        },
-        {
-            title: "Father's name",
-            dataIndex: "father",
         },
         {
             title: "Actions",

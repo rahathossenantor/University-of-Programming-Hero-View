@@ -6,11 +6,16 @@ import CustomSelect from "../../../components/ui/CustomSelect";
 import { codeOptions, courseOptions, prefixOptions } from "../../../constants/courseManagement.constants";
 import useCourseOptions from "../../../hooks/useCourseOptions";
 import CustomField from "../../../components/ui/CustomField";
+import { toast } from "sonner";
+import { useCreateCourseMutation } from "../../../redux/features/admin/courseManagement.api";
 
 const CreateCourse = () => {
     const { coursesOptions: preReqCoursesOptions, isCoursesLoading } = useCourseOptions();
+    const [createCourse] = useCreateCourseMutation();
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+        const toastId = toast.loading("Createing course...");
+
         const preRequisiteCourses = data.preRequisiteCourses.map((course: string) => ({
             course
         }));
@@ -19,6 +24,13 @@ const CreateCourse = () => {
             code: Number(data.code),
             credits: Number(data.credits),
             preRequisiteCourses,
+        };
+
+        try {
+            const res = await createCourse(course).unwrap();
+            toast.success(res?.message, { id: toastId });
+        } catch (err: any) {
+            toast.error(err?.data?.message, { id: toastId });
         };
     };
 

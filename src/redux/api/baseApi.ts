@@ -55,6 +55,7 @@ const baseApi = createApi({
     reducerPath: "baseApi",
     baseQuery: customBaseQuery,
     tagTypes: [
+        "faculties",
         "students",
         "academicSemesters",
         "academicDepartments",

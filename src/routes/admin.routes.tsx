@@ -15,6 +15,7 @@ import StudentDetails from "../pages/admin/userManagement/StudentDetails";
 import CreateSemesterRegistration from "../pages/admin/courseManagement/CreateSemesterRegistration";
 import SemesterRagistrations from "../pages/admin/courseManagement/SemesterRagistrations";
 import CreateCourse from "../pages/admin/courseManagement/CreateCourse";
+import Courses from "../pages/admin/courseManagement/Courses";
 
 const userManagementPaths = [
         {
@@ -91,6 +92,11 @@ const courseManagementPaths = [
         name: "Create Course",
         path: "create-course",
         element: <CreateCourse />
+    },
+    {
+        name: "Courses",
+        path: "courses",
+        element: <Courses />
     },
 ];
 

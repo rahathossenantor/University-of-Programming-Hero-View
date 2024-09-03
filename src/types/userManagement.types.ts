@@ -44,3 +44,24 @@ export type TStudent = {
     isDeleted: boolean;
     fullName: string;
 };
+
+export type TFaculty = {
+    _id: string;
+    id: string;
+    user: string;
+    designation: string;
+    name: TName;
+    fullName: string;
+    gender: string;
+    dateOfBirth?: Date;
+    email: string;
+    contactNo: string;
+    emergencyContactNo: string;
+    bloodGroup?: string;
+    presentAddress: string;
+    permanentAddress: string;
+    avatar?: string;
+    academicDepartment: TAcademicDepartment;
+    academicFaculty: TAcademicFaculty;
+    isDeleted: boolean;
+};

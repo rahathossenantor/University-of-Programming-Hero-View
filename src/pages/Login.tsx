@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import CustomField from "../components/ui/CustomField";
 import CustomForm from "../components/ui/CustomForm";
+import CustomFormLayoutWrapper from "../components/layout/CustomFormLayoutWrapper";
+import { customFormStyle } from "../styles/global.styles";
 
 const Login = () => {
     const dispatch = useAppDispatch();
@@ -31,30 +33,23 @@ const Login = () => {
         };
     };
 
-    const defaultLoginFormValues = {
-        id: "A-0001",
-        password: "admin"
-    };
-
     return (
-        <CustomForm onSubmit={onSubmit} defaultValues={defaultLoginFormValues}>
-            <Row justify="center" align="middle">
-                <div
-                    style={{
-                        width: "400px",
-                        padding: "20px",
-                        borderRadius: "10px",
-                        boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-                        marginTop: "20px"
-                    }}
-                >
-                    <CustomForm.Title>Login</CustomForm.Title>
-                    <CustomField type="text" name="id" label="User ID" isRequired />
-                    <CustomField type="text" name="password" label="User Password" isRequired />
-                    <Button htmlType="submit" style={{ fontSize: "15px" }}>Login</Button>
-                </div>
-            </Row>
-        </CustomForm>
+        <CustomFormLayoutWrapper>
+            <CustomForm
+                onSubmit={onSubmit}
+            >
+                <Row justify="center" align="middle">
+                    <div
+                        style={customFormStyle}
+                    >
+                        <CustomForm.Title>Login</CustomForm.Title>
+                        <CustomField type="text" name="id" label="User ID" isRequired />
+                        <CustomField type="password" name="password" label="User Password" isRequired />
+                        <Button htmlType="submit" style={{ fontSize: "15px" }}>Login</Button>
+                    </div>
+                </Row>
+            </CustomForm>
+        </CustomFormLayoutWrapper>
     );
 };
 

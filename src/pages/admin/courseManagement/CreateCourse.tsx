@@ -8,6 +8,7 @@ import useCourseOptions from "../../../hooks/useCourseOptions";
 import CustomField from "../../../components/ui/CustomField";
 import { toast } from "sonner";
 import { useCreateCourseMutation } from "../../../redux/features/admin/courseManagement.api";
+import { customFormStyle } from "../../../styles/global.styles";
 
 const CreateCourse = () => {
     const { coursesOptions: preReqCoursesOptions, isCoursesLoading } = useCourseOptions();
@@ -40,12 +41,7 @@ const CreateCourse = () => {
                 onSubmit={onSubmit}
             >
                 <div
-                    style={{
-                        width: "500px",
-                        padding: "20px",
-                        borderRadius: "10px",
-                        boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)"
-                    }}
+                    style={customFormStyle}
                 >
                     <CustomForm.Title>Create Course</CustomForm.Title>
                     <CustomSelect name="name" label="Name" options={courseOptions} isRequired />

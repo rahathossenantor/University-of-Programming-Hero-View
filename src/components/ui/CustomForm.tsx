@@ -40,7 +40,7 @@ const CustomForm = ({ children, onSubmit, defaultValues, resolver }: TFormProps)
 
 const Title = ({ children }: { children: ReactNode }) => {
     return (
-        <h2 style={{ textAlign: "center", margin: "8px 0", fontSize: "27px" }}>{children}</h2>
+        <h3 style={{ textAlign: "center", margin: "8px 0", fontSize: "25px" }}>{children}</h3>
     );
 };
 CustomForm.Title = Title;

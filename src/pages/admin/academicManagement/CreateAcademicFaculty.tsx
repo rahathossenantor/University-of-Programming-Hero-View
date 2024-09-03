@@ -8,6 +8,7 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import { useCreateAcademicFacultyMutation } from "../../../redux/features/admin/academicManagement.api";
 import CustomFormLayoutWrapper from "../../../components/layout/CustomFormLayoutWrapper";
+import { customFormStyle } from "../../../styles/global.styles";
 
 const CreateAcademicFaculty = () => {
     const [createAcademicFaculty] = useCreateAcademicFacultyMutation();
@@ -30,12 +31,7 @@ const CreateAcademicFaculty = () => {
                 resolver={zodResolver(academicFacultySchema)}
             >
                 <div
-                    style={{
-                        width: "500px",
-                        padding: "20px",
-                        borderRadius: "10px",
-                        boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)"
-                    }}
+                    style={customFormStyle}
                 >
                     <CustomForm.Title>Create Academic Faculty</CustomForm.Title>
                     <CustomSelect name="name" label="Faculty" options={facultyOptions} isRequired />

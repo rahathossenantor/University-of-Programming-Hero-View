@@ -8,6 +8,7 @@ import { academicSemesterSchema } from "../../../schemas/academicManagement.sche
 import { toast } from "sonner";
 import { useCreateAcademicSemesterMutation } from "../../../redux/features/admin/academicManagement.api";
 import CustomFormLayoutWrapper from "../../../components/layout/CustomFormLayoutWrapper";
+import { customFormStyle } from "../../../styles/global.styles";
 
 const CreateAcademicSemester = () => {
     const [createAcademicSemester] = useCreateAcademicSemesterMutation();
@@ -37,12 +38,7 @@ const CreateAcademicSemester = () => {
                 resolver={zodResolver(academicSemesterSchema)}
             >
                 <div
-                    style={{
-                        width: "500px",
-                        padding: "20px",
-                        borderRadius: "10px",
-                        boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)"
-                    }}
+                    style={customFormStyle}
                 >
                     <CustomForm.Title>Create Academic Semester</CustomForm.Title>
                     <CustomSelect name="name" label="Semester" options={semesterOptions} isRequired />

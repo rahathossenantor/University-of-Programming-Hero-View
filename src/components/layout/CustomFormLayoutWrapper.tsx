@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 const CustomFormLayoutWrapper = ({ children }: { children: ReactNode }) => {
     return (
         <Flex justify="center" align="center">
-            <Col lg={{ span: 6 }} span={24}>
+            <Col xxl={{ span: 6 }} xl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 12 }} span={24}>
                 {children}
             </Col>
         </Flex>

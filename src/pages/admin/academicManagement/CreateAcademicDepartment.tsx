@@ -9,6 +9,7 @@ import { departmentOptions } from "../../../constants/academicManagement.constan
 import { toast } from "sonner";
 import useAcademicFacultyOptions from "../../../hooks/useAcademicFacultyOptions";
 import CustomFormLayoutWrapper from "../../../components/layout/CustomFormLayoutWrapper";
+import { customFormStyle } from "../../../styles/global.styles";
 
 const CreateAcademicDepartment = () => {
     const { academicFacultyOptions, isAcademicFacultyLoading } = useAcademicFacultyOptions();
@@ -32,12 +33,7 @@ const CreateAcademicDepartment = () => {
                 resolver={zodResolver(academicDepartmentSchema)}
             >
                 <div
-                    style={{
-                        width: "500px",
-                        padding: "20px",
-                        borderRadius: "10px",
-                        boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)"
-                    }}
+                    style={customFormStyle}
                 >
                     <CustomForm.Title>Create Academic Department</CustomForm.Title>
                     <CustomSelect name="name" label="Department" options={departmentOptions} isRequired />

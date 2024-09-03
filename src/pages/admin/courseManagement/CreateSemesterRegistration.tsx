@@ -8,6 +8,7 @@ import CustomField from "../../../components/ui/CustomField";
 import { useCreateSemesterRegistrationMutation } from "../../../redux/features/admin/courseManagement.api";
 import { toast } from "sonner";
 import CustomFormLayoutWrapper from "../../../components/layout/CustomFormLayoutWrapper";
+import { customFormStyle } from "../../../styles/global.styles";
 
 const defaultSemesterRegistrationFormValues = {
     maxCredit: 12,
@@ -43,12 +44,7 @@ const CreateSemesterRegistration = () => {
                 defaultValues={defaultSemesterRegistrationFormValues}
             >
                 <div
-                    style={{
-                        width: "500px",
-                        padding: "20px",
-                        borderRadius: "10px",
-                        boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)"
-                    }}
+                    style={customFormStyle}
                 >
                     <CustomForm.Title>Semester Registration</CustomForm.Title>
                     <CustomSelect name="academicSemester" label="Academic Semester" options={academicSemesterOptions!} disabled={isAcademicSemesterLoading} isRequired />

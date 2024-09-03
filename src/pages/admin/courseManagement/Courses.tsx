@@ -1,10 +1,11 @@
 import { Button, Modal, Table, Tag } from "antd";
-import { useGetAllCoursesQuery } from "../../../redux/features/admin/courseManagement.api";
+import { useAssignFacultiesMutation, useGetAllCoursesQuery } from "../../../redux/features/admin/courseManagement.api";
 import { useState } from "react";
 import CustomForm from "../../../components/ui/CustomForm";
 import { useGetAllFacultiesQuery } from "../../../redux/features/admin/userManagement.api";
 import CustomSelect from "../../../components/ui/CustomSelect";
 import { FieldValues, SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
 
 type TCourseTableItem = {
     key: string;
@@ -59,6 +60,8 @@ const Courses = () => {
 
 const AssignFaculties = ({ course }: { course: TCourseTableItem }) => {
     const { data, isLoading } = useGetAllFacultiesQuery(undefined);
+    const [assignFaculties] = useAssignFacultiesMutation();
+
     const facultyOptions = data?.data?.map(({ _id, fullName }) => ({
         label: fullName,
         value: _id,
@@ -74,9 +77,19 @@ const AssignFaculties = ({ course }: { course: TCourseTableItem }) => {
     };
 
     const handleSubmit: SubmitHandler<FieldValues> = async (data) => {
-        const courseId = course.key;
-        console.log(courseId);
-        console.log(data);
+        const toastId = toast.loading("Assigning faculties...");
+        const courseData = {
+            id: course.key,
+            data,
+        };
+
+        try {
+            const res = await assignFaculties(courseData).unwrap();
+            handleCancel();
+            toast.success(res?.message, { id: toastId });
+        } catch (err: any) {
+            toast.error(err?.data?.message, { id: toastId });
+        };
     };
 
     return (

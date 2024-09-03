@@ -41,6 +41,10 @@ const CreateStudent = () => {
     // upload data on the server (client image upload)
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         const toastId = toast.loading("Creating student...");
+
+        if (!data.name.middleName) {
+            data.name.middleName = "";
+        };
         const student = {
             password: "student",
             student: data

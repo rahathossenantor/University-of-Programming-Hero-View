@@ -34,6 +34,10 @@ const CreateFaculty = () => {
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         const toastId = toast.loading("Creating faculty...");
+
+        if (!data.name.middleName) {
+            data.name.middleName = "";
+        };
         const faculty = {
             password: "faculty",
             faculty: data

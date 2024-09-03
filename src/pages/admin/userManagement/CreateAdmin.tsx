@@ -15,6 +15,10 @@ const CreateAdmin = () => {
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         const toastId = toast.loading("Creating admin...");
+
+        if (!data.name.middleName) {
+            data.name.middleName = "";
+        };
         const admin = {
             password: "admin",
             admin: data

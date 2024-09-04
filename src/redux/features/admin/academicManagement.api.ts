@@ -47,10 +47,20 @@ const academicManagementApi = baseApi.injectEndpoints({
             invalidatesTags: ["academicDepartments"],
         }),
         getAllAcademicDepartments: builder.query({
-            query: () => ({
-                url: "/academic-departments",
-                method: "GET",
-            }),
+            query: (queryParams?: TQueryParam[]) => {
+                const params = new URLSearchParams();
+                if (queryParams) {
+                    queryParams.forEach((query: TQueryParam) => {
+                        params.append(query.name, query.value as string);
+                    });
+                };
+
+                return {
+                    url: "/academic-departments",
+                    method: "GET",
+                    params,
+                };
+            },
             providesTags: ["academicDepartments"],
             transformResponse: (response: TDataResWithRedux<TAcademicDepartment[]>) => {
                 return {
@@ -70,10 +80,20 @@ const academicManagementApi = baseApi.injectEndpoints({
             invalidatesTags: ["academicFaculties"],
         }),
         getAllAcademicFaculties: builder.query({
-            query: () => ({
-                url: "/academic-faculties",
-                method: "GET",
-            }),
+            query: (queryParams?: TQueryParam[]) => {
+                const params = new URLSearchParams();
+                if (queryParams) {
+                    queryParams.forEach((query: TQueryParam) => {
+                        params.append(query.name, query.value as string);
+                    });
+                };
+
+                return {
+                    url: "/academic-faculties",
+                    method: "GET",
+                    params,
+                };
+            },
             providesTags: ["academicFaculties"],
             transformResponse: (response: TDataResWithRedux<TAcademicFaculty[]>) => {
                 return {

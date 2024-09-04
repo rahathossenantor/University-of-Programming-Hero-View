@@ -4,14 +4,14 @@ import CustomForm from "../../../components/ui/CustomForm";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import CustomSelect from "../../../components/ui/CustomSelect";
 import { codeOptions, courseOptions, prefixOptions } from "../../../constants/courseManagement.constants";
-import useCourseOptions from "../../../hooks/useCourseOptions";
+import useCourses from "../../../hooks/useCourses";
 import CustomField from "../../../components/ui/CustomField";
 import { toast } from "sonner";
 import { useCreateCourseMutation } from "../../../redux/features/admin/courseManagement.api";
 import { customFormStyle } from "../../../styles/global.styles";
 
 const CreateCourse = () => {
-    const { coursesOptions: preReqCoursesOptions, isCoursesLoading } = useCourseOptions();
+    const { coursesOptions: preReqCoursesOptions, isCoursesLoading } = useCourses();
     const [createCourse] = useCreateCourseMutation();
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {

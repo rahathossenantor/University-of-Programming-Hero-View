@@ -7,12 +7,12 @@ import { academicDepartmentSchema } from "../../../schemas/academicManagement.sc
 import { useCreateAcademicDepartmentMutation } from "../../../redux/features/admin/academicManagement.api";
 import { departmentOptions } from "../../../constants/academicManagement.constants";
 import { toast } from "sonner";
-import useAcademicFacultyOptions from "../../../hooks/useAcademicFacultyOptions";
+import useAcademicFaculties from "../../../hooks/useAcademicFaculties";
 import CustomFormLayoutWrapper from "../../../components/layout/CustomFormLayoutWrapper";
 import { customFormStyle } from "../../../styles/global.styles";
 
 const CreateAcademicDepartment = () => {
-    const { academicFacultyOptions, isAcademicFacultyLoading } = useAcademicFacultyOptions();
+    const { academicFacultyOptions, isAcademicFacultyLoading } = useAcademicFaculties();
     const [createAcademicDepartment] = useCreateAcademicDepartmentMutation();
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {

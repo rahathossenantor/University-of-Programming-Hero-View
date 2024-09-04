@@ -1,7 +1,7 @@
 import { useGetAllAcademicFacultiesQuery } from "../redux/features/admin/academicManagement.api";
 import { TQueryParam } from "../types/types.global";
 
-const useAcademicFacultyOptions = (queryParams?: TQueryParam[]) => {
+const useAcademicFaculties = (queryParams?: TQueryParam[]) => {
     const { data: academicFaculties, isLoading: isAcademicFacultyLoading } = useGetAllAcademicFacultiesQuery(queryParams);
 
     const academicFacultyOptions = academicFaculties?.data?.map(faculty => ({
@@ -16,4 +16,4 @@ const useAcademicFacultyOptions = (queryParams?: TQueryParam[]) => {
     };
 };
 
-export default useAcademicFacultyOptions;
+export default useAcademicFaculties;

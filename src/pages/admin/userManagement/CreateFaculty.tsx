@@ -8,7 +8,7 @@ import CustomDatePicker from "../../../components/ui/CustomDatePicker";
 import { useCreateFacultyMutation } from "../../../redux/features/admin/userManagement.api";
 import { toast } from "sonner";
 import uploadImage from "../../../utils/uploadImage";
-import useAcademicDepartmentOptions from "../../../hooks/useAcademicDepartmentOptions";
+import useAcademicDepartments from "../../../hooks/useAcademicDepartments";
 import CustomUserFormLayoutWrapper from "../../../components/layout/CustomUserFormLayoutWrapper";
 
 const defaultFacultyFormValues = {
@@ -29,7 +29,7 @@ const defaultFacultyFormValues = {
 };
 
 const CreateFaculty = () => {
-    const { academicDepartmentOptions, isAcademicDepartmentLoading } = useAcademicDepartmentOptions();
+    const { academicDepartmentOptions, isAcademicDepartmentLoading } = useAcademicDepartments();
     const [createFaculty] = useCreateFacultyMutation();
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {

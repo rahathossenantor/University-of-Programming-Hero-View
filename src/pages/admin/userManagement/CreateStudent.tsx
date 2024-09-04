@@ -8,13 +8,13 @@ import CustomDatePicker from "../../../components/ui/CustomDatePicker";
 import { useCreateStudentMutation } from "../../../redux/features/admin/userManagement.api";
 import { toast } from "sonner";
 import uploadImage from "../../../utils/uploadImage";
-import useAcademicSemesterOptions from "../../../hooks/useAcademicSemesterOptions";
-import useAcademicDepartmentOptions from "../../../hooks/useAcademicDepartmentOptions";
+import useAcademicSemesters from "../../../hooks/useAcademicSemesters";
+import useAcademicDepartments from "../../../hooks/useAcademicDepartments";
 import CustomUserFormLayoutWrapper from "../../../components/layout/CustomUserFormLayoutWrapper";
 
 const CreateStudent = () => {
-    const { academicDepartmentOptions, isAcademicDepartmentLoading } = useAcademicDepartmentOptions();
-    const { academicSemesterOptions, isAcademicSemesterLoading } = useAcademicSemesterOptions();
+    const { academicDepartmentOptions, isAcademicDepartmentLoading } = useAcademicDepartments();
+    const { academicSemesterOptions, isAcademicSemesterLoading } = useAcademicSemesters();
     const [createStudent] = useCreateStudentMutation();
 
     // upload data on the server (server image upload)

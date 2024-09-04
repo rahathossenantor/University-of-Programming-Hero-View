@@ -2,7 +2,7 @@ import { Button } from "antd";
 import CustomForm from "../../../components/ui/CustomForm";
 import CustomSelect from "../../../components/ui/CustomSelect";
 import { FieldValues, SubmitHandler } from "react-hook-form";
-import useAcademicSemesterOptions from "../../../hooks/useAcademicSemesterOptions";
+import useAcademicSemesters from "../../../hooks/useAcademicSemesters";
 import CustomDatePicker from "../../../components/ui/CustomDatePicker";
 import CustomField from "../../../components/ui/CustomField";
 import { useCreateSemesterRegistrationMutation } from "../../../redux/features/admin/courseManagement.api";
@@ -17,7 +17,7 @@ const defaultSemesterRegistrationFormValues = {
 };
 
 const CreateSemesterRegistration = () => {
-    const { academicSemesterOptions, isAcademicSemesterLoading } = useAcademicSemesterOptions();
+    const { academicSemesterOptions, isAcademicSemesterLoading } = useAcademicSemesters();
     const [createSemesterRegistration] = useCreateSemesterRegistrationMutation();
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {

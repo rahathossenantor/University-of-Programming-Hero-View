@@ -1,7 +1,7 @@
 import Courses from "../pages/admin/courseManagement/Courses";
 import CreateCourse from "../pages/admin/courseManagement/CreateCourse";
 import CreateSemesterRegistration from "../pages/admin/courseManagement/CreateSemesterRegistration";
-import OfferCourse from "../pages/admin/courseManagement/OfferCourse";
+import OfferCourse from "../pages/admin/courseManagement/OfferCours";
 import SemesterRagistrations from "../pages/admin/courseManagement/SemesterRagistrations";
 
 export const courseManagementPaths = [
@@ -26,8 +26,8 @@ export const courseManagementPaths = [
         element: <Courses />
     },
     {
-        name: "Offer Courses",
-        path: "offer-courses",
+        name: "Offer Course",
+        path: "offer-course",
         element: <OfferCourse />
     },
 ];

@@ -7,12 +7,13 @@ import { Button } from "antd";
 import { customFormStyle } from "../../../styles/global.styles";
 import useCourses from "../../../hooks/useCourses";
 import { useState } from "react";
-import { useGetFacultiesWithCourseQuery } from "../../../redux/features/admin/courseManagement.api";
+import { useCreateOfferedCourseMutation, useGetFacultiesWithCourseQuery } from "../../../redux/features/admin/courseManagement.api";
 import CustomSelect from "../../../components/ui/CustomSelect";
 import { useGetFacultyQuery } from "../../../redux/features/admin/userManagement.api";
 import CustomField from "../../../components/ui/CustomField";
 import { dayOptions, sectionOptions } from "../../../constants/courseManagement.constants";
 import CustomTimePicker from "../../../components/ui/CustomTimePicker";
+import { toast } from "sonner";
 
 const OfferCourse = () => {
     const [courseId, setCourseId] = useState("");
@@ -31,6 +32,7 @@ const OfferCourse = () => {
         facultyId,
         { skip: !facultyId }
     );
+    const [createOfferedCourse] = useCreateOfferedCourseMutation();
 
     const facultyOptions = facultiesWithCourse?.data?.faculties?.map((faculty: any) => ({
         label: faculty.fullName,
@@ -43,14 +45,25 @@ const OfferCourse = () => {
         academics.academicFaculty = faculty?.data?.academicFaculty;
     };
 
-    const handleSubmit: SubmitHandler<FieldValues> = (data) => {
+    const handleSubmit: SubmitHandler<FieldValues> = async (data) => {
+        const toastId = toast.loading("Createing offered course...");
+        const generateTime = (time: any) => (`${time.$H < 10 ? "0" : ""}${time.$H}:${time.$m < 10 ? "0" : ""}${time.$m}`);
+
         const offeredCourse = {
             ...academics,
             ...data,
+            startTime: generateTime(data.startTime),
+            endTime: generateTime(data.endTime),
             section: Number(data.section),
             maxCapacity: Number(data.maxCapacity),
         };
-        console.log(offeredCourse);
+
+        try {
+            const res = await createOfferedCourse(offeredCourse).unwrap();
+            toast.success(res?.message, { id: toastId });
+        } catch (err: any) {
+            toast.error(err?.data?.message, { id: toastId });
+        };
     };
 
     return (

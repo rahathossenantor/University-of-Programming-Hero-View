@@ -18,6 +18,7 @@ const CustomTimePicker = ({ name, label, isRequired = false }: TCustomDatePicker
                         size="large"
                         format="HH:mm"
                         style={{ width: "100%" }}
+                        required={isRequired}
                     />
                     {error && <small style={{ color: "red" }}>{error.message}</small>}
                 </Form.Item>

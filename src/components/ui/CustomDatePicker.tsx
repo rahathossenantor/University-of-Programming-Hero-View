@@ -17,6 +17,7 @@ const CustomDatePicker = ({ name, label, isRequired = false }: TCustomDatePicker
                         {...field}
                         size="large"
                         style={{ width: "100%" }}
+                        required={isRequired}
                     />
                     {error && <small style={{ color: "red" }}>{error.message}</small>}
                 </Form.Item>

@@ -36,8 +36,19 @@ const CreateAcademicDepartment = () => {
                     style={customFormStyle}
                 >
                     <CustomForm.Title>Create Academic Department</CustomForm.Title>
-                    <CustomSelect name="name" label="Department" options={departmentOptions} isRequired />
-                    <CustomSelect name="academicFaculty" label="Faculty" options={academicFacultyOptions!} disabled={isAcademicFacultyLoading} isRequired />
+                    <CustomSelect
+                        label="Select Department"
+                        name="name"
+                        options={departmentOptions}
+                        isRequired
+                    />
+                    <CustomSelect
+                        name="academicFaculty"
+                        label="Select Faculty"
+                        options={academicFacultyOptions!}
+                        disabled={isAcademicFacultyLoading}
+                        isRequired
+                    />
                     <Button htmlType="submit" style={{ fontSize: "15px" }}>Submit</Button>
                 </div>
             </CustomForm>

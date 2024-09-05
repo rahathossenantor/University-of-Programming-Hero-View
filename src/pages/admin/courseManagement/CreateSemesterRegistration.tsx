@@ -47,11 +47,35 @@ const CreateSemesterRegistration = () => {
                     style={customFormStyle}
                 >
                     <CustomForm.Title>Semester Registration</CustomForm.Title>
-                    <CustomSelect name="academicSemester" label="Academic Semester" options={academicSemesterOptions!} disabled={isAcademicSemesterLoading} isRequired />
-                    <CustomDatePicker name="startDate" label="Start Date" isRequired />
-                    <CustomDatePicker name="endDate" label="End Date" isRequired />
-                    <CustomField type="number" name="minCredit" label="Min Credit" isRequired />
-                    <CustomField type="number" name="maxCredit" label="Max Credit" isRequired />
+                    <CustomSelect
+                        name="academicSemester"
+                        label="Select Academic Semester"
+                        options={academicSemesterOptions!}
+                        disabled={isAcademicSemesterLoading}
+                        isRequired
+                    />
+                    <CustomDatePicker
+                        name="startDate"
+                        label="Start Date"
+                        isRequired
+                    />
+                    <CustomDatePicker
+                        name="endDate"
+                        label="End Date"
+                        isRequired
+                    />
+                    <CustomField
+                        type="number"
+                        name="minCredit"
+                        label="Min Credit"
+                        isRequired
+                    />
+                    <CustomField
+                        type="number"
+                        name="maxCredit"
+                        label="Max Credit"
+                        isRequired
+                    />
                     <Button htmlType="submit" style={{ fontSize: "15px" }}>Submit</Button>
                 </div>
             </CustomForm>

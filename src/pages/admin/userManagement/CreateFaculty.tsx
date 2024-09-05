@@ -11,23 +11,6 @@ import uploadImage from "../../../utils/uploadImage";
 import useAcademicDepartments from "../../../hooks/useAcademicDepartments";
 import CustomUserFormLayoutWrapper from "../../../components/layout/CustomUserFormLayoutWrapper";
 
-const defaultFacultyFormValues = {
-    name: {
-        firstName: "Muntasir",
-        middleName: "Ahmed",
-        lastName: "Talukdar"
-    },
-    // dateOfBirth: "2014-05-12",
-    gender: "Male",
-    bloodGroup: "O-",
-    designation: "Assistant Professor",
-    email: "muntasir.ahmed@gmail.com",
-    contactNo: "+8801986523489",
-    emergencyContactNo: "+8801986523489",
-    presentAddress: "Shiddhirganj, Narayanganj, Bangladesh.",
-    permanentAddress: "Mirsharai, Chattogram, Bangladesh.",
-};
-
 const CreateFaculty = () => {
     const { academicDepartmentOptions, isAcademicDepartmentLoading } = useAcademicDepartments();
     const [createFaculty] = useCreateFacultyMutation();
@@ -49,7 +32,7 @@ const CreateFaculty = () => {
                 faculty.faculty.avatar = imgUrl;
             } else {
                 delete faculty.faculty.avatar;
-            }
+            };
 
             const res = await createFaculty(faculty).unwrap();
             console.log(res);
@@ -63,32 +46,62 @@ const CreateFaculty = () => {
         <CustomUserFormLayoutWrapper>
             <CustomForm
                 onSubmit={onSubmit}
-                defaultValues={defaultFacultyFormValues}
             >
                 <CustomForm.Title>Create Faculty</CustomForm.Title>
 
                 <Divider>Personal Info</Divider>
                 <Row gutter={10}>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="First Name" name="name.firstName" isRequired />
+                        <CustomField
+                            type="text"
+                            label="First Name"
+                            name="name.firstName"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Middle Name" name="name.middleName" />
+                        <CustomField
+                            type="text"
+                            label="Middle Name"
+                            name="name.middleName"
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Last Name" name="name.lastName" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Last Name"
+                            name="name.lastName"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomSelect label="Gender" name="gender" options={genderOptions} isRequired={true} />
+                        <CustomSelect
+                            label="Select Gender"
+                            name="gender"
+                            options={genderOptions}
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomSelect label="Blood Group" name="bloodGroup" options={bloodGroupOptions} />
+                        <CustomSelect
+                            label="Select Blood Group"
+                            name="bloodGroup"
+                            options={bloodGroupOptions}
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomSelect label="Designation" name="designation" options={designationOptions} />
+                        <CustomSelect
+                            label="Select Designation"
+                            name="designation"
+                            options={designationOptions}
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomDatePicker label="Date of Birth" name="dateOfBirth" isRequired={true} />
+                        <CustomDatePicker
+                            label="Select Date of Birth"
+                            name="dateOfBirth"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
                         <Controller
@@ -113,25 +126,55 @@ const CreateFaculty = () => {
                 <Divider>Contact Info</Divider>
                 <Row gutter={10}>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="email" label="Email" name="email" isRequired />
+                        <CustomField
+                            type="email"
+                            label="Email"
+                            name="email"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Contact No" name="contactNo" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Contact No"
+                            name="contactNo"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Emergency Contact No" name="emergencyContactNo" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Emergency Contact No"
+                            name="emergencyContactNo"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Present Address" name="presentAddress" />
+                        <CustomField
+                            type="text"
+                            label="Present Address"
+                            name="presentAddress"
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Permanent Address" name="permanentAddress" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Permanent Address"
+                            name="permanentAddress"
+                            isRequired
+                        />
                     </Col>
                 </Row>
                 <Divider>Academic Info</Divider>
                 <Row gutter={10}>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomSelect label="Academic Department" name="academicDepartment" options={academicDepartmentOptions!} disabled={isAcademicDepartmentLoading} isRequired />
+                        <CustomSelect
+                            label="Select Academic Department"
+                            name="academicDepartment"
+                            options={academicDepartmentOptions!}
+                            disabled={isAcademicDepartmentLoading}
+                            isRequired
+                        />
                     </Col>
                 </Row>
                 <Button htmlType="submit" style={{ fontSize: "15px" }}>Submit</Button>

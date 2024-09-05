@@ -30,7 +30,7 @@ const CreateAdmin = () => {
                 admin.admin.avatar = imgUrl;
             } else {
                 delete admin.admin.avatar;
-            }
+            };
 
             const res = await createAdmin(admin).unwrap();
             toast.success(res?.message, { id: toastId, duration: 2000 });
@@ -49,25 +49,56 @@ const CreateAdmin = () => {
                 <Divider>Personal Info</Divider>
                 <Row gutter={10}>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="First Name" name="name.firstName" isRequired />
+                        <CustomField
+                            type="text"
+                            label="First Name"
+                            name="name.firstName"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Middle Name" name="name.middleName" />
+                        <CustomField
+                            type="text"
+                            label="Middle Name"
+                            name="name.middleName"
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Last Name" name="name.lastName" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Last Name"
+                            name="name.lastName"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomSelect label="Gender" name="gender" options={genderOptions} isRequired={true} />
+                        <CustomSelect
+                            label="Select Gender"
+                            name="gender"
+                            options={genderOptions}
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomSelect label="Blood Group" name="bloodGroup" options={bloodGroupOptions} />
+                        <CustomSelect
+                            label="Select Blood Group"
+                            name="bloodGroup"
+                            options={bloodGroupOptions}
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomSelect label="Designation" name="designation" options={designationOptions} />
+                        <CustomSelect
+                            label="Select Designation"
+                            name="designation"
+                            options={designationOptions}
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomDatePicker label="Date of Birth" name="dateOfBirth" isRequired={true} />
+                        <CustomDatePicker
+                            label="Select Date of Birth"
+                            name="dateOfBirth"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
                         <Controller
@@ -92,19 +123,42 @@ const CreateAdmin = () => {
                 <Divider>Contact Info</Divider>
                 <Row gutter={10}>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="email" label="Email" name="email" isRequired />
+                        <CustomField
+                            type="email"
+                            label="Email"
+                            name="email"
+                            isRequired />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Contact No" name="contactNo" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Contact No"
+                            name="contactNo"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Emergency Contact No" name="emergencyContactNo" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Emergency Contact No"
+                            name="emergencyContactNo"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Present Address" name="presentAddress" />
+                        <CustomField
+                            type="text"
+                            label="Present Address"
+                            name="presentAddress"
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Permanent Address" name="permanentAddress" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Permanent Address"
+                            name="permanentAddress"
+                            isRequired
+                        />
                     </Col>
                 </Row>
                 <Button htmlType="submit" style={{ fontSize: "15px" }}>Submit</Button>

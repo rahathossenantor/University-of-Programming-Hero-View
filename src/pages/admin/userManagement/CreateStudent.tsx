@@ -56,7 +56,7 @@ const CreateStudent = () => {
                 student.student.avatar = imgUrl;
             } else {
                 delete student.student.avatar;
-            }
+            };
 
             const res = await createStudent(student).unwrap();
             toast.success(res?.message, { id: toastId, duration: 2000 });
@@ -75,22 +75,49 @@ const CreateStudent = () => {
                 <Divider>Personal Info</Divider>
                 <Row gutter={10}>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="First Name" name="name.firstName" isRequired />
+                        <CustomField
+                            type="text"
+                            label="First Name"
+                            name="name.firstName"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Middle Name" name="name.middleName" />
+                        <CustomField
+                            type="text"
+                            label="Middle Name"
+                            name="name.middleName"
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Last Name" name="name.lastName" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Last Name"
+                            name="name.lastName"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomSelect label="Gender" name="gender" options={genderOptions} isRequired={true} />
+                        <CustomSelect
+                            label="Select Gender"
+                            name="gender"
+                            options={genderOptions}
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomSelect label="Blood Group" name="bloodGroup" options={bloodGroupOptions} />
+                        <CustomSelect
+                            label="Select Blood Group"
+                            name="bloodGroup"
+                            options={bloodGroupOptions}
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomDatePicker label="Date of Birth" name="dateOfBirth" isRequired={true} />
+                        <CustomDatePicker
+                            label="Select Date of Birth"
+                            name="dateOfBirth"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
                         <Controller
@@ -115,67 +142,152 @@ const CreateStudent = () => {
                 <Divider>Contact Info</Divider>
                 <Row gutter={10}>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="email" label="Email" name="email" isRequired />
+                        <CustomField
+                            type="email"
+                            label="Email"
+                            name="email"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Contact No" name="contactNo" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Contact No"
+                            name="contactNo"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Emergency Contact No" name="emergencyContactNo" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Emergency Contact No"
+                            name="emergencyContactNo"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Present Address" name="presentAddress" />
+                        <CustomField
+                            type="text"
+                            label="Present Address"
+                            name="presentAddress"
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Permanent Address" name="permanentAddress" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Permanent Address"
+                            name="permanentAddress"
+                            isRequired
+                        />
                     </Col>
                 </Row>
 
                 <Divider>Parents Info</Divider>
                 <Row gutter={10}>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Father's Name" name="parents.fatherName" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Father's Name"
+                            name="parents.fatherName"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Father's Occupation" name="parents.fatherOccupation" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Father's Occupation"
+                            name="parents.fatherOccupation"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Father's Contact No" name="parents.fatherContactNo" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Father's Contact No"
+                            name="parents.fatherContactNo"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Mother's Name" name="parents.motherName" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Mother's Name"
+                            name="parents.motherName"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Mother's Occupation" name="parents.motherOccupation" isRequired />
+                        <CustomField
+                            type="text" label="Mother's Occupation"
+                            name="parents.motherOccupation"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Mother's Contact No" name="parents.motherContactNo" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Mother's Contact No"
+                            name="parents.motherContactNo"
+                            isRequired
+                        />
                     </Col>
                 </Row>
 
                 <Divider>Guardian Info</Divider>
                 <Row gutter={10}>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Guardian's Name" name="guardian.name" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Guardian's Name"
+                            name="guardian.name"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Guardian's Occupation" name="guardian.occupation" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Guardian's Occupation"
+                            name="guardian.occupation"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Guardian's Contact No" name="guardian.contactNo" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Guardian's Contact No"
+                            name="guardian.contactNo"
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomField type="text" label="Guardian's Address" name="guardian.address" isRequired />
+                        <CustomField
+                            type="text"
+                            label="Guardian's Address"
+                            name="guardian.address"
+                            isRequired
+                        />
                     </Col>
                 </Row>
 
                 <Divider>Academic Info</Divider>
                 <Row gutter={10}>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomSelect label="Academic Department" name="academicDepartment" options={academicDepartmentOptions!} disabled={isAcademicDepartmentLoading} isRequired />
+                        <CustomSelect
+                            label="Select Academic Department"
+                            name="academicDepartment"
+                            options={academicDepartmentOptions!}
+                            disabled={isAcademicDepartmentLoading}
+                            isRequired
+                        />
                     </Col>
                     <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                        <CustomSelect label="Academic Semester" name="academicSemester" options={academicSemesterOptions!} disabled={isAcademicSemesterLoading} isRequired />
+                        <CustomSelect
+                            label="Select Academic Semester"
+                            name="academicSemester"
+                            options={academicSemesterOptions!}
+                            disabled={isAcademicSemesterLoading}
+                            isRequired
+                        />
                     </Col>
                 </Row>
 

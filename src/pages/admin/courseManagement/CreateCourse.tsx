@@ -44,11 +44,38 @@ const CreateCourse = () => {
                     style={customFormStyle}
                 >
                     <CustomForm.Title>Create Course</CustomForm.Title>
-                    <CustomSelect name="name" label="Name" options={courseOptions} isRequired />
-                    <CustomSelect mode="multiple" name="preRequisiteCourses" label="Pre Requisite Courses" options={preReqCoursesOptions!} disabled={isCoursesLoading} isRequired />
-                    <CustomSelect name="prefix" label="Prefix" options={prefixOptions} isRequired />
-                    <CustomSelect name="code" label="Code" options={codeOptions} isRequired />
-                    <CustomField type="number" name="credits" label="Credits" isRequired />
+                    <CustomSelect
+                        name="name"
+                        label="Name"
+                        options={courseOptions}
+                        isRequired
+                    />
+                    <CustomSelect
+                        mode="multiple"
+                        name="preRequisiteCourses"
+                        label="Select Pre Requisite Courses"
+                        options={preReqCoursesOptions!}
+                        disabled={isCoursesLoading}
+                        isRequired
+                    />
+                    <CustomSelect
+                        name="prefix"
+                        label="Select Prefix"
+                        options={prefixOptions}
+                        isRequired
+                    />
+                    <CustomSelect
+                        name="code"
+                        label="Select Code"
+                        options={codeOptions}
+                        isRequired
+                    />
+                    <CustomField
+                        type="number"
+                        name="credits"
+                        label="Credits"
+                        isRequired
+                    />
                     <Button htmlType="submit" style={{ fontSize: "15px" }}>Submit</Button>
                 </div>
             </CustomForm>

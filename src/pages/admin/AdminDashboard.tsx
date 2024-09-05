@@ -68,6 +68,7 @@ const AdminDashboard = () => {
             <SectionWrapper>
                 <LinkElement link="/admin/create-semester-registration">Create semester registration</LinkElement>
                 <LinkElement link="/admin/create-course">Create course</LinkElement>
+                <LinkElement link="/admin/offer-courses">Offer courses</LinkElement>
                 <LinkElement link="/admin/semester-registrations">See all semester registrations</LinkElement>
                 <LinkElement link="/admin/courses">See all courses</LinkElement>
             </SectionWrapper>

@@ -41,10 +41,30 @@ const CreateAcademicSemester = () => {
                     style={customFormStyle}
                 >
                     <CustomForm.Title>Create Academic Semester</CustomForm.Title>
-                    <CustomSelect name="name" label="Semester" options={semesterOptions} isRequired />
-                    <CustomSelect name="year" label="Year" options={yearOptions} isRequired />
-                    <CustomSelect name="startMonth" label="Start Month" options={monthOptions} isRequired />
-                    <CustomSelect name="endMonth" label="End Month" options={monthOptions} isRequired />
+                    <CustomSelect
+                        label="Select Semester"
+                        name="name"
+                        options={semesterOptions}
+                        isRequired
+                    />
+                    <CustomSelect
+                        label="Select Year"
+                        name="year"
+                        options={yearOptions}
+                        isRequired
+                    />
+                    <CustomSelect
+                        label="Select Start Month"
+                        name="startMonth"
+                        options={monthOptions}
+                        isRequired
+                    />
+                    <CustomSelect
+                        label="Select End Month"
+                        name="endMonth"
+                        options={monthOptions}
+                        isRequired
+                    />
                     <Button htmlType="submit" style={{ fontSize: "15px" }}>Submit</Button>
                 </div>
             </CustomForm>

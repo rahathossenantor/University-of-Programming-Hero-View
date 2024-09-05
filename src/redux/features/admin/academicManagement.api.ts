@@ -102,6 +102,12 @@ const academicManagementApi = baseApi.injectEndpoints({
                 };
             }
         }),
+        getAcademicFaculty: builder.query({
+            query: (academicFacultyId?: string) => ({
+                url: `/academic-faculties/${academicFacultyId}`,
+                method: "GET",
+            }),
+        }),
     }),
 });
 
@@ -111,6 +117,7 @@ export const {
 
     useCreateAcademicFacultyMutation,
     useGetAllAcademicFacultiesQuery,
+    useGetAcademicFacultyQuery,
 
     useCreateAcademicDepartmentMutation,
     useGetAllAcademicDepartmentsQuery,

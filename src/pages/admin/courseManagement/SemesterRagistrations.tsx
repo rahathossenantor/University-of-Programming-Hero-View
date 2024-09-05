@@ -1,5 +1,6 @@
 import { Button, Dropdown, MenuProps, Table, Tag } from "antd";
-import { useGetAllSemesterRegistrationsQuery, useUpdateSemesterRegistrationStatusMutation } from "../../../redux/features/admin/courseManagement.api";
+import { useUpdateSemesterRegistrationStatusMutation } from "../../../redux/features/admin/courseManagement.api";
+import useSemesterRagistrations from "../../../hooks/useSemesterRagistrations";
 import moment from "moment";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -17,8 +18,7 @@ const items: MenuProps["items"] = [
 
 const SemesterRagistrations = () => {
     const [semesterRegistrationId, setSemesterRegistrationId] = useState("");
-
-    const { data, isFetching } = useGetAllSemesterRegistrationsQuery([{ name: "sort", value: "createdAt" }]);
+    const { semesterRegistrations: data, isSemesterRegistrationLoading } = useSemesterRagistrations([{ name: "sort", value: "createdAt" }]);
     const [updateSemesterRegistrationStatus] = useUpdateSemesterRegistrationStatusMutation();
 
     const semesterRegistrations = data?.data?.map(({ _id, academicSemester, status, startDate, endDate, minCredit, maxCredit }) => ({
@@ -112,7 +112,7 @@ const SemesterRagistrations = () => {
 
     return (
         <Table
-            loading={isFetching}
+            loading={isSemesterRegistrationLoading}
             columns={columns}
             dataSource={semesterRegistrations}
         />

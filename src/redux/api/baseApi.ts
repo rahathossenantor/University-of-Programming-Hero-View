@@ -19,36 +19,43 @@ const baseQuery = fetchBaseQuery({
 });
 
 const customBaseQuery: BaseQueryFn<FetchArgs, BaseQueryApi, DefinitionType> = async (args, api, extraOptions): Promise<any> => {
-    let query = await baseQuery(args, api, extraOptions);
+    try {
+        let query = await baseQuery(args, api, extraOptions);
 
-    if (query?.error?.status === 403) {
-        toast.error("User does not exist!", { duration: 2000 });
-    }
-
-    if (query?.error?.status === 401) {
-        // get refresh token
-        const res = await fetch(`${baseUrl}/auth/refresh-token`, {
-            method: "POST",
-            credentials: "include",
-        });
-        const data = await res.json();
-
-        if (data?.data?.accessToken) {
-            // set refresh token as access token
-            const { user } = (api.getState() as RootState).auth;
-            api.dispatch(
-                loginUser({
-                    user,
-                    token: data.data.accessToken
-                })
+        if (query?.error?.status === 403) {
+            toast.error(
+                (query?.error?.data as Partial<{ message: string }>)?.message,
+                { duration: 1000 },
             );
+        };
 
-            query = await baseQuery(args, api, extraOptions);
-        } else {
-            api.dispatch(logoutUser());
-        }
-    }
-    return query;
+        if (query?.error?.status === 401) {
+            // get refresh token
+            const res = await fetch(`${baseUrl}/auth/refresh-token`, {
+                method: "POST",
+                credentials: "include",
+            });
+            const data = await res.json();
+
+            if (data?.data?.accessToken) {
+                // set refresh token as access token
+                const { user } = (api.getState() as RootState).auth;
+                api.dispatch(
+                    loginUser({
+                        user,
+                        token: data.data.accessToken
+                    })
+                );
+
+                query = await baseQuery(args, api, extraOptions);
+            } else {
+                api.dispatch(logoutUser());
+            };
+        };
+        return query;
+    } catch (err: any) {
+        toast.error(err?.message || "Something went wrong!");
+    };
 };
 
 const baseApi = createApi({

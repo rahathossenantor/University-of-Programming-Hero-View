@@ -2,7 +2,7 @@ import { useGetAllSemesterRegistrationsQuery } from "../redux/features/admin/cou
 import { TQueryParam } from "../types/types.global";
 
 const useSemesterRagistrations = (queryParams?: TQueryParam[]) => {
-    const { data: semesterRegistrations, isLoading: isSemesterRegistrationLoading } = useGetAllSemesterRegistrationsQuery(queryParams);
+    const { data: semesterRegistrations, isFetching: isSemesterRegistrationFetching } = useGetAllSemesterRegistrationsQuery(queryParams);
 
     const semesterRegistrationOptions = semesterRegistrations?.data?.map(semesterRegistration => {
         return {
@@ -14,7 +14,7 @@ const useSemesterRagistrations = (queryParams?: TQueryParam[]) => {
     return {
         semesterRegistrations,
         semesterRegistrationOptions,
-        isSemesterRegistrationLoading,
+        isSemesterRegistrationFetching,
     };
 };
 

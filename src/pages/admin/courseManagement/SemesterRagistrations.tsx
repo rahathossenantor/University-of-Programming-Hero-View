@@ -18,7 +18,7 @@ const items: MenuProps["items"] = [
 
 const SemesterRagistrations = () => {
     const [semesterRegistrationId, setSemesterRegistrationId] = useState("");
-    const { semesterRegistrations: data, isSemesterRegistrationLoading } = useSemesterRagistrations([{ name: "sort", value: "createdAt" }]);
+    const { semesterRegistrations: data, isSemesterRegistrationFetching } = useSemesterRagistrations([{ name: "sort", value: "createdAt" }]);
     const [updateSemesterRegistrationStatus] = useUpdateSemesterRegistrationStatusMutation();
 
     const semesterRegistrations = data?.data?.map(({ _id, academicSemester, status, startDate, endDate, minCredit, maxCredit }) => ({
@@ -112,7 +112,7 @@ const SemesterRagistrations = () => {
 
     return (
         <Table
-            loading={isSemesterRegistrationLoading}
+            loading={isSemesterRegistrationFetching}
             columns={columns}
             dataSource={semesterRegistrations}
         />

@@ -12,7 +12,7 @@ import CustomFormLayoutWrapper from "../../../components/layout/CustomFormLayout
 import { customFormStyle } from "../../../styles/global.styles";
 
 const CreateAcademicDepartment = () => {
-    const { academicFacultyOptions, isAcademicFacultyLoading } = useAcademicFaculties();
+    const { academicFacultyOptions, isAcademicFacultyFetching } = useAcademicFaculties();
     const [createAcademicDepartment] = useCreateAcademicDepartmentMutation();
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -46,7 +46,7 @@ const CreateAcademicDepartment = () => {
                         name="academicFaculty"
                         label="Select Faculty"
                         options={academicFacultyOptions!}
-                        disabled={isAcademicFacultyLoading}
+                        disabled={isAcademicFacultyFetching}
                         isRequired
                     />
                     <Button htmlType="submit" style={{ fontSize: "15px" }}>Submit</Button>

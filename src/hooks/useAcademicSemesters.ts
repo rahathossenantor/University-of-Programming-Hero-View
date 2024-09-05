@@ -2,7 +2,7 @@ import { useGetAllAcademicSemestersQuery } from "../redux/features/admin/academi
 import { TQueryParam } from "../types/types.global";
 
 const useAcademicSemesters = (queryParams?: TQueryParam[]) => {
-    const { data: academicSemesters, isLoading: isAcademicSemesterLoading } = useGetAllAcademicSemestersQuery(queryParams);
+    const { data: academicSemesters, isFetching: isAcademicSemesterFetching } = useGetAllAcademicSemestersQuery(queryParams);
 
     const academicSemesterOptions = academicSemesters?.data?.map(academicSemester => ({
         label: `${academicSemester.name} ${academicSemester.year}`,
@@ -12,7 +12,7 @@ const useAcademicSemesters = (queryParams?: TQueryParam[]) => {
     return {
         academicSemesters,
         academicSemesterOptions,
-        isAcademicSemesterLoading,
+        isAcademicSemesterFetching,
     };
 };
 

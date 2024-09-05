@@ -5,6 +5,8 @@ import { facultySidebarItems } from "../../routes/faculty.routes";
 import { studentSidebarItems } from "../../routes/student.routes";
 import { useAppSelector } from "../../redux/hooks";
 import { ItemType, MenuItemType } from "antd/es/menu/interface";
+import { Navigate } from "react-router-dom";
+import verifyToken from "../../utils/verifyToken";
 
 const { Sider } = Layout;
 
@@ -17,7 +19,13 @@ const userRoles = {
 
 const Sidebar = () => {
     // implement sidebar items based on role
-    const { user } = useAppSelector((state) => state.auth);
+    const { token } = useAppSelector((state) => state.auth);
+
+    if (!token) {
+        return <Navigate to="/login" replace />;
+    };
+
+    const user = verifyToken(token);
     const role = (user! as TUser).role;
     let sidebarItems;
 

@@ -2,7 +2,7 @@ import { useGetAllAcademicDepartmentsQuery } from "../redux/features/admin/acade
 import { TQueryParam } from "../types/types.global";
 
 const useAcademicDepartments = (queryParams?: TQueryParam[]) => {
-    const { data: academicDepartments, isLoading: isAcademicDepartmentLoading } = useGetAllAcademicDepartmentsQuery(queryParams);
+    const { data: academicDepartments, isFetching: isAcademicDepartmentFetching } = useGetAllAcademicDepartmentsQuery(queryParams);
 
     const academicDepartmentOptions = academicDepartments?.data?.map(academicDepartment => ({
         label: academicDepartment.name,
@@ -12,7 +12,7 @@ const useAcademicDepartments = (queryParams?: TQueryParam[]) => {
     return {
         academicDepartments,
         academicDepartmentOptions,
-        isAcademicDepartmentLoading,
+        isAcademicDepartmentFetching,
     };
 };
 

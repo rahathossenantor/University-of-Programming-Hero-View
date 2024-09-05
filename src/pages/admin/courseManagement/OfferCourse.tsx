@@ -18,12 +18,12 @@ const OfferCourse = () => {
     const [courseId, setCourseId] = useState("");
     const [facultyId, setFacultyId] = useState("");
 
-    const { semesterRegistrationOptions, isSemesterRegistrationLoading } = useSemesterRagistrations([
+    const { semesterRegistrationOptions, isSemesterRegistrationFetching } = useSemesterRagistrations([
         { name: "sort", value: "createdAt" },
         { name: "status", value: "ONGOING" },
     ]);
-    const { coursesOptions, isCoursesLoading } = useCourses();
-    const { data: facultiesWithCourse } = useGetFacultiesWithCourseQuery(
+    const { coursesOptions, isCoursesFetching } = useCourses();
+    const { data: facultiesWithCourse, isFetching: isFacultyFetching } = useGetFacultiesWithCourseQuery(
         courseId,
         { skip: !courseId }
     );
@@ -59,31 +59,31 @@ const OfferCourse = () => {
                 <div style={customFormStyle}>
                     <CustomForm.Title>Offer Course</CustomForm.Title>
                     <CustomSelect
-                        name="semesterRegistration"
                         label="Select Semester Registration"
+                        name="semesterRegistration"
                         options={semesterRegistrationOptions!}
-                        disabled={isSemesterRegistrationLoading}
+                        disabled={isSemesterRegistrationFetching}
                         isRequired
                     />
                     <CustomSelectWithWatch
-                        name="course"
                         label="Select Course"
+                        name="course"
                         options={coursesOptions!}
-                        disabled={isCoursesLoading}
+                        disabled={isCoursesFetching}
                         onSelect={setCourseId}
                         isRequired
                     />
                     <CustomSelectWithWatch
-                        name="faculty"
                         label="Select Faculty"
+                        name="faculty"
                         options={facultyOptions!}
-                        disabled={!courseId}
+                        disabled={!courseId || isFacultyFetching}
                         onSelect={setFacultyId}
                         isRequired
                     />
                     <CustomSelect
-                        mode="multiple"
                         label="Select days"
+                        mode="multiple"
                         name="days"
                         options={dayOptions}
                         isRequired
@@ -105,8 +105,8 @@ const OfferCourse = () => {
                         isRequired
                     />
                     <CustomField
-                        type="number"
                         label="Max Capacity"
+                        type="number"
                         name="maxCapacity"
                         isRequired
                     />

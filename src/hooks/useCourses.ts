@@ -2,7 +2,7 @@ import { useGetAllCoursesQuery } from "../redux/features/admin/courseManagement.
 import { TQueryParam } from "../types/types.global";
 
 const useCourses = (queryParams?: TQueryParam[]) => {
-    const { data: courses, isLoading: isCoursesLoading } = useGetAllCoursesQuery(queryParams);
+    const { data: courses, isFetching: isCoursesFetching } = useGetAllCoursesQuery(queryParams);
 
     const coursesOptions = courses?.data?.map(course => ({
         label: course.name,
@@ -12,7 +12,7 @@ const useCourses = (queryParams?: TQueryParam[]) => {
     return {
         courses,
         coursesOptions,
-        isCoursesLoading,
+        isCoursesFetching,
     };
 };
 

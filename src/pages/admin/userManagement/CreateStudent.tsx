@@ -13,8 +13,8 @@ import useAcademicDepartments from "../../../hooks/useAcademicDepartments";
 import CustomUserFormLayoutWrapper from "../../../components/layout/CustomUserFormLayoutWrapper";
 
 const CreateStudent = () => {
-    const { academicDepartmentOptions, isAcademicDepartmentLoading } = useAcademicDepartments();
-    const { academicSemesterOptions, isAcademicSemesterLoading } = useAcademicSemesters();
+    const { academicDepartmentOptions, isAcademicDepartmentFetching } = useAcademicDepartments();
+    const { academicSemesterOptions, isAcademicSemesterFetching } = useAcademicSemesters();
     const [createStudent] = useCreateStudentMutation();
 
     // upload data on the server (server image upload)
@@ -276,7 +276,7 @@ const CreateStudent = () => {
                             label="Select Academic Department"
                             name="academicDepartment"
                             options={academicDepartmentOptions!}
-                            disabled={isAcademicDepartmentLoading}
+                            disabled={isAcademicDepartmentFetching}
                             isRequired
                         />
                     </Col>
@@ -285,7 +285,7 @@ const CreateStudent = () => {
                             label="Select Academic Semester"
                             name="academicSemester"
                             options={academicSemesterOptions!}
-                            disabled={isAcademicSemesterLoading}
+                            disabled={isAcademicSemesterFetching}
                             isRequired
                         />
                     </Col>

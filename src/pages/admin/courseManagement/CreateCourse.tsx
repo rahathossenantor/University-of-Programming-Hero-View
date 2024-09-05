@@ -11,7 +11,7 @@ import { useCreateCourseMutation } from "../../../redux/features/admin/courseMan
 import { customFormStyle } from "../../../styles/global.styles";
 
 const CreateCourse = () => {
-    const { coursesOptions: preReqCoursesOptions, isCoursesLoading } = useCourses();
+    const { coursesOptions: preReqCoursesOptions, isCoursesFetching } = useCourses();
     const [createCourse] = useCreateCourseMutation();
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -55,7 +55,7 @@ const CreateCourse = () => {
                         name="preRequisiteCourses"
                         label="Select Pre Requisite Courses"
                         options={preReqCoursesOptions!}
-                        disabled={isCoursesLoading}
+                        disabled={isCoursesFetching}
                         isRequired
                     />
                     <CustomSelect

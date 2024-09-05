@@ -17,7 +17,7 @@ const defaultSemesterRegistrationFormValues = {
 };
 
 const CreateSemesterRegistration = () => {
-    const { academicSemesterOptions, isAcademicSemesterLoading } = useAcademicSemesters();
+    const { academicSemesterOptions, isAcademicSemesterFetching } = useAcademicSemesters();
     const [createSemesterRegistration] = useCreateSemesterRegistrationMutation();
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -51,7 +51,7 @@ const CreateSemesterRegistration = () => {
                         name="academicSemester"
                         label="Select Academic Semester"
                         options={academicSemesterOptions!}
-                        disabled={isAcademicSemesterLoading}
+                        disabled={isAcademicSemesterFetching}
                         isRequired
                     />
                     <CustomDatePicker

@@ -12,7 +12,7 @@ import useAcademicDepartments from "../../../hooks/useAcademicDepartments";
 import CustomUserFormLayoutWrapper from "../../../components/layout/CustomUserFormLayoutWrapper";
 
 const CreateFaculty = () => {
-    const { academicDepartmentOptions, isAcademicDepartmentLoading } = useAcademicDepartments();
+    const { academicDepartmentOptions, isAcademicDepartmentFetching } = useAcademicDepartments();
     const [createFaculty] = useCreateFacultyMutation();
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -172,7 +172,7 @@ const CreateFaculty = () => {
                             label="Select Academic Department"
                             name="academicDepartment"
                             options={academicDepartmentOptions!}
-                            disabled={isAcademicDepartmentLoading}
+                            disabled={isAcademicDepartmentFetching}
                             isRequired
                         />
                     </Col>

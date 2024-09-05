@@ -6,6 +6,7 @@ import { adminRoutes } from "./admin.routes";
 import { facultyRoutes } from "./faculty.routes";
 import { studentRoutes } from "./student.routes";
 import RedirectUser from "../pages/RedirectUser";
+import ProtectedRoute from "../components/layout/ProtectedRoute";
 
 const router = createBrowserRouter([
     {
@@ -14,17 +15,29 @@ const router = createBrowserRouter([
     },
     {
         path: "/admin",
-        element: <App />,
+        element: (
+            <ProtectedRoute role="admin">
+                <App />
+            </ProtectedRoute>
+        ),
         children: adminRoutes,
     },
     {
         path: "/faculty",
-        element: <App />,
+        element: (
+            <ProtectedRoute role="faculty">
+                <App />
+            </ProtectedRoute>
+        ),
         children: facultyRoutes,
     },
     {
         path: "/student",
-        element: <App />,
+        element: (
+            <ProtectedRoute role="student">
+                <App />
+            </ProtectedRoute>
+        ),
         children: studentRoutes,
     },
     {

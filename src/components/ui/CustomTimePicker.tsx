@@ -1,5 +1,5 @@
-import { DatePicker, Form } from "antd";
-import { Controller } from "react-hook-form";
+import { Form, TimePicker } from 'antd';
+import { Controller } from 'react-hook-form';
 
 type TCustomDatePickerProps = {
     name: string;
@@ -7,15 +7,16 @@ type TCustomDatePickerProps = {
     isRequired?: boolean;
 };
 
-const CustomDatePicker = ({ name, label, isRequired = false }: TCustomDatePickerProps) => {
+const CustomTimePicker = ({ name, label, isRequired = false }: TCustomDatePickerProps) => {
     return (
         <Controller
             name={name}
             render={({ field, fieldState: { error } }) =>
                 <Form.Item label={`${label}: ${isRequired ? "*" : ""}`}>
-                    <DatePicker
+                    <TimePicker
                         {...field}
                         size="large"
+                        format="HH:mm"
                         style={{ width: "100%" }}
                     />
                     {error && <small style={{ color: "red" }}>{error.message}</small>}
@@ -25,4 +26,4 @@ const CustomDatePicker = ({ name, label, isRequired = false }: TCustomDatePicker
     );
 };
 
-export default CustomDatePicker;
+export default CustomTimePicker;

@@ -10,12 +10,18 @@ import { useState } from "react";
 import { useGetFacultiesWithCourseQuery } from "../../../redux/features/admin/courseManagement.api";
 import CustomSelect from "../../../components/ui/CustomSelect";
 import { useGetFacultyQuery } from "../../../redux/features/admin/userManagement.api";
+import CustomField from "../../../components/ui/CustomField";
+import { dayOptions, sectionOptions } from "../../../constants/courseManagement.constants";
+import CustomTimePicker from "../../../components/ui/CustomTimePicker";
 
 const OfferCourse = () => {
     const [courseId, setCourseId] = useState("");
     const [facultyId, setFacultyId] = useState("");
 
-    const { semesterRegistrationOptions, isSemesterRegistrationLoading } = useSemesterRagistrations([{ name: "sort", value: "createdAt" }]);
+    const { semesterRegistrationOptions, isSemesterRegistrationLoading } = useSemesterRagistrations([
+        { name: "sort", value: "createdAt" },
+        { name: "status", value: "ONGOING" },
+    ]);
     const { coursesOptions, isCoursesLoading } = useCourses();
     const { data: facultiesWithCourse } = useGetFacultiesWithCourseQuery(
         courseId,
@@ -41,7 +47,9 @@ const OfferCourse = () => {
         const offeredCourse = {
             ...academics,
             ...data,
-        }
+            section: Number(data.section),
+            maxCapacity: Number(data.maxCapacity),
+        };
         console.log(offeredCourse);
     };
 
@@ -71,6 +79,35 @@ const OfferCourse = () => {
                         options={facultyOptions!}
                         disabled={!courseId}
                         onSelect={setFacultyId}
+                        isRequired
+                    />
+                    <CustomSelect
+                        mode="multiple"
+                        label="Select days"
+                        name="days"
+                        options={dayOptions}
+                        isRequired
+                    />
+                    <CustomTimePicker
+                        label="Select Start Time"
+                        name="startTime"
+                        isRequired
+                    />
+                    <CustomTimePicker
+                        label="Select End Time"
+                        name="endTime"
+                        isRequired
+                    />
+                    <CustomSelect
+                        label="Select Section"
+                        name="section"
+                        options={sectionOptions}
+                        isRequired
+                    />
+                    <CustomField
+                        type="number"
+                        label="Max Capacity"
+                        name="maxCapacity"
                         isRequired
                     />
                     <Button htmlType="submit" style={{ fontSize: "15px" }}>Submit</Button>

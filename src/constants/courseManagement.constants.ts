@@ -19,6 +19,9 @@ const prefixes = [
     "REACT",
 ];
 
+const days = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
+const sections = ["01", "02", "03", "04", "05"];
+
 const courseCodes = [
     {
         name: "Basic Computer Skill",
@@ -75,4 +78,14 @@ export const prefixOptions = prefixes.map(prefix => ({
 export const codeOptions = courseCodes.map(course => ({
     label: `${course.code} (${course.name})`,
     value: course.code,
+}));
+
+export const dayOptions = days.map(day => ({
+    label: day,
+    value: day,
+}));
+
+export const sectionOptions = sections.map(section => ({
+    label: section,
+    value: section,
 }));

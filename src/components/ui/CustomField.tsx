@@ -12,7 +12,7 @@ const CustomField = ({ type, name, label, isRequired = false }: TCustomFieldProp
     return (
         <Controller
             name={name}
-            render={({ field }) =>
+            render={({ field, fieldState: { error } }) =>
                 <Form.Item label={`${label}: ${isRequired ? "*" : ""}`}>
                     <Input
                         {...field}
@@ -22,6 +22,7 @@ const CustomField = ({ type, name, label, isRequired = false }: TCustomFieldProp
                         size="large"
                         style={{ fontFamily: "Poppins" }}
                     />
+                    {error && <small style={{ color: "red" }}>{error.message}</small>}
                 </Form.Item>
             }
         />

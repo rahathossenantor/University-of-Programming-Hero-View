@@ -32,6 +32,7 @@ const OfferCourse = () => {
         facultyId,
         { skip: !facultyId }
     );
+    console.log(faculty);
     const [createOfferedCourse] = useCreateOfferedCourseMutation();
 
     const facultyOptions = facultiesWithCourse?.data?.faculties?.map((faculty: any) => ({
@@ -42,7 +43,7 @@ const OfferCourse = () => {
     const academics: any = {};
     if (faculty) {
         academics.academicDepartment = faculty?.data?.academicDepartment?._id;
-        academics.academicFaculty = faculty?.data?.academicFaculty;
+        academics.academicFaculty = faculty?.data?.academicFaculty?._id;
     };
 
     const handleSubmit: SubmitHandler<FieldValues> = async (data) => {

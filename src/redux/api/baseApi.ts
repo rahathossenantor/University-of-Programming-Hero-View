@@ -71,6 +71,7 @@ const baseApi = createApi({
         "courses",
         "facultiesWithCourse",
         "offeredCourses",
+        "myOfferedCourses",
     ],
     endpoints: () => ({})
 });

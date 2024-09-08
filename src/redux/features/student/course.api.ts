@@ -28,9 +28,18 @@ const courseApi = baseApi.injectEndpoints({
                 };
             },
         }),
+        enrollCourse: builder.mutation({
+            query: (course) => ({
+                url: "/enrolled-courses/create-enrolled-course",
+                method: "POST",
+                body: course,
+            }),
+            invalidatesTags: ["myOfferedCourses"],
+        }),
     }),
 });
 
 export const {
     useGetMyOfferedCoursesQuery,
+    useEnrollCourseMutation,
 } = courseApi;

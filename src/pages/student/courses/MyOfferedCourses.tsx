@@ -1,5 +1,6 @@
 import { Button, Col, Row } from "antd";
-import { useGetMyOfferedCoursesQuery } from "../../../redux/features/student/course.api";
+import { useEnrollCourseMutation, useGetMyOfferedCoursesQuery } from "../../../redux/features/student/course.api";
+import { toast } from "sonner";
 
 const sectionElementStyle = {
     display: "flex",
@@ -9,12 +10,12 @@ const sectionElementStyle = {
 
 const MyOfferedCourses = () => {
     const { data, isLoading } = useGetMyOfferedCoursesQuery(undefined);
+    const [enrollCourse] = useEnrollCourseMutation();
 
     let offeredCourses;
     if (!isLoading) {
-        offeredCourses = data?.data?.reduce((acc, offeredCourse) => {
+        offeredCourses = data?.data?.reduce((acc: { [index: string]: any }, offeredCourse) => {
             const courseTitle: string = offeredCourse?.course?.name;
-
             acc[courseTitle] = acc[courseTitle] || { name: courseTitle, sections: [], _id: offeredCourse?._id };
             acc[courseTitle].sections?.push({
                 section: offeredCourse?.section,
@@ -23,16 +24,26 @@ const MyOfferedCourses = () => {
                 startTime: offeredCourse?.startTime,
                 endTime: offeredCourse?.endTime,
             });
-
             return acc;
         }, {});
         offeredCourses = Object.values(offeredCourses!);
     };
 
     if (isLoading) return <p>Loading...</p>;
+    if (!offeredCourses?.length) return <p>No courses are available to enroll!</p>;
 
     const handleEnroll = async (courseId: string) => {
-        console.log(courseId);
+        const toastId = toast.loading("Enrolling...");
+        const course = {
+            offeredCourse: courseId,
+        };
+
+        try {
+            const res = await enrollCourse(course).unwrap();
+            toast.success(res?.message, { id: toastId });
+        } catch (err: any) {
+            toast.error(err?.data?.message, { id: toastId });
+        };
     };
 
     return (

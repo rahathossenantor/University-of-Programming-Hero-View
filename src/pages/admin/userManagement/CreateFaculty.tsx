@@ -35,7 +35,6 @@ const CreateFaculty = () => {
             };
 
             const res = await createFaculty(faculty).unwrap();
-            console.log(res);
             toast.success(res?.message, { id: toastId, duration: 2000 });
         } catch (err: any) {
             toast.error(err?.message || err?.data?.message, { id: toastId });

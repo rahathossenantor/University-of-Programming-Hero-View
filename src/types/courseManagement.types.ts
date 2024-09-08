@@ -48,7 +48,7 @@ export type TOfferedCourse = {
     academicSemester: string;
     academicFaculty: string;
     academicDepartment: string;
-    course: string;
+    course: TCourse;
     faculty: string;
     maxCapacity: number;
     section: number;

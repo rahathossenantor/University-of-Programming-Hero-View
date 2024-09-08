@@ -32,7 +32,6 @@ const OfferCourse = () => {
         facultyId,
         { skip: !facultyId }
     );
-    console.log(faculty);
     const [createOfferedCourse] = useCreateOfferedCourseMutation();
 
     const facultyOptions = facultiesWithCourse?.data?.faculties?.map((faculty: any) => ({

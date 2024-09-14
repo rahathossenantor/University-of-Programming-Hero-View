@@ -1,3 +1,4 @@
+import MyEnrolledCourses from "../pages/student/courses/MyEnrolledCourses";
 import MyOfferedCourses from "../pages/student/courses/MyOfferedCourses";
 import StudentDashboard from "../pages/student/StudentDashboard";
 import routesGenerator from "../utils/routesGenerator";
@@ -16,6 +17,11 @@ const studentPaths = [
                 name: "My Offered Courses",
                 path: "my-offered-courses",
                 element: <MyOfferedCourses />
+            },
+            {
+                name: "My Enrolled Courses",
+                path: "my-enrolled-courses",
+                element: <MyEnrolledCourses />
             },
         ],
     },

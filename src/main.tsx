@@ -17,3 +17,5 @@ createRoot(document.getElementById("root")!).render(
     </Provider>
   </StrictMode>
 );
+
+// VITE_IMAGE_HOSTING_KEY = 350636cb58e46dc7a4f3e7f1c1f6f0b8
